@@ -1,4 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <canvas id="chartjs-simulator" height="200" width="300" aria-label="Simulator Graph" role="img"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+//get data from Python/Flask
 
+// let race_labels = [];
+// let datasets = [];
+
+// Get canvas/chart element
+let ctx = document.getElementById('chartjs-simulator').getContext('2d');
+
+// set data
+let data = {
+    labels: ['','AUS', 'DAL', 'USA', 'GER'],
+    datasets: [
+        {
+            label:"HAM",
+            data: [
+                0,
+                25,
+                40,
+                55,
+                70
+            ]
+        },
+        {
+            label:"VET",
+            data: [
+                0,
+                18,
+                38,
+                48,
+                69
+            ]
+        }
+        
+    ]
+}
+
+// set options
+let options = {}
+
+// Initialize the actual chart
+let simulatorChart = new Chart(ctx, {
+    type: 'line',
+    data: data
+});
+</script>
 {% endblock %}

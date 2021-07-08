@@ -1,7 +1,9 @@
 from flask import Flask, render_template, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 
-from models import db, connect_db, User
+from models import db, connect_db, User, Season
+
+# from helpers import is_logged_in
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///influenceF1'
@@ -62,8 +64,15 @@ def tutorial():
     return render_template('tutorial.html')
 
 
-@app.route('/simulator')
-def simulator():
+# ***********************************************
+# Simulator
+
+@app.route('/simulator/<int:year>')
+def simulator(year):
     """Main functionality page of application: show simulator."""
+
+    # is_logged_in()
+
+    season = Season.query.get_or_404(year)
 
     return render_template('simulator.html')
