@@ -176,6 +176,9 @@ class User_Points(db.Model):
                 ondelete='CASCADE'),
                 primary_key=True)
 
+    position = db.Column(db.Integer,
+                nullable=False)
+
     points = db.Column(db.Float,
                 nullable=False)
 
