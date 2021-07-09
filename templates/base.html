@@ -9,14 +9,60 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
     <link rel="stylesheet"
     href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/nav.css">
 </head>
 <body>
-    <h1>InfluenceF1</h1>
+    <!-- Nav side bar -->
+    <div class="wrapper">
+        <div class="container align-items-center">
+            <div id="sidebar" class="row">
+                <div class="col-12">
+                    <div id="nav-exit-row" class="row">
+                        <div class="my-2">
+                            <button id="sidebar-toggle-close" class="btn btn-primary">T</button>
+                        </div>
+                    </div>
+                    <div id="nav-content-row" class="row">
+                        <nav class="nav  text-center flex-column">
+                            <div class="h5">InfluenceF1</div>
+    
+                            <a href="/" class="nav-link">HOME</a>
+                            <a href="/how-it-works" class="nav-link">HOW IT WORKS</a>
+                            <a href="simulator/2007" class="nav-link">2007</a>
+                            <a href="/simulator/2010" class="nav-link">2010</a>
+                        </nav>
+                    </div>
+                    <div id="nav-user-row" class="row">
+                        <ul class="nav justify-content-center">
+                            <a href="#" class="nav-link">Login</a>
+                            <a href="#" class="nav-link">Signup</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div>side bar menu: HOME, HOW IT WORKS, 1984, 2007, 2010 Login/logout signup</div>
+    <!-- page heading and content -->
+    <div class="container-fluid">
+        <div class="row justify-content-center m-3">
+            <div class="col">
+                <nav id="headnav">
+                    <div class="navbar-brand">
+                        <a href="/" class="h4 text-decoration-none">InfluenceF1</a>
+                    </div>
+                    <div class="nav-right">
+                        <button id="sidebar-toggle-open" class="btn btn-sm btn-primary m-1">T</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
     {% block content %}
     {% endblock %}
     {% block javascript%}
     {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/static/sidebar.js"></script>
 </body>
 </html>

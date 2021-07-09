@@ -1,0 +1,47 @@
+/* ********************************************** */
+/* Top navbar */
+
+#headnav {
+    display: flex;
+}
+
+.nav-right {
+    margin-left: auto;
+    text-align: right;
+}
+
+
+/* ********************************************** */
+/* SIDEBAR */
+
+#sidebar {
+    width: 40vw;
+    position: fixed;
+    top: 0;
+    right: -40vw;
+    height: 100vh;
+    background-color: rgb(39, 42, 83);
+    color: white;
+    box-shadow: 5px 5px 5px black;
+}
+
+#sidebar.active {
+    right:0;
+}
+
+#nav-toggle-row {
+    height: 100vh;
+}
+
+#nav-exit-row {
+    height: 10vh;
+}
+
+#nav-content-row {
+    height: 80vh;
+    padding-top: 22vh;
+}
+
+#nav-user-row {
+    height: 10vh;
+}
