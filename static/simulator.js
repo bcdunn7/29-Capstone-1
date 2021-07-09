@@ -49,6 +49,12 @@ let simulatorChart = new Chart(ctx, {
               return delay;
             },
         },
+        elements: {
+            line: {
+                tension: 0.2,
+                borderWidth: 2
+            }
+        }
       },
 });
 
