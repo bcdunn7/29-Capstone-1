@@ -9,50 +9,27 @@
 </div>
 {% endblock %}
 {% block javascript %}
-<script>
-//get data from Python/Flask
-
-// let race_labels = [];
-// let datasets = [];
-
-// Get canvas/chart element
-let ctx = document.getElementById('chartjs-simulator').getContext('2d');
-
-// set data
-let data = {
-    labels: ['','AUS', 'DAL', 'USA', 'GER'],
-    datasets: [
-        {
-            label:"HAM",
-            data: [
-                0,
-                25,
-                40,
-                55,
-                70
-            ]
-        },
-        {
-            label:"VET",
-            data: [
-                0,
-                18,
-                38,
-                48,
-                69
-            ]
-        }
-        
-    ]
-}
-
-// set options
-let options = {}
-
-// Initialize the actual chart
-let simulatorChart = new Chart(ctx, {
-    type: 'line',
-    data: data
-});
+<script type="text/javascript">
+    //get data from Python/Flask
+    let race_labels = JSON.parse({{ race_labels|tojson }});
+    let datasets = JSON.parse({{ datasets|tojson }});
+    
+    // Get canvas/chart element
+    let ctx = document.getElementById('chartjs-simulator').getContext('2d');
+    
+    // set data
+    let data = {
+        labels: race_labels,
+        datasets: datasets
+    }
+    
+    // set options
+    let options = {}
+    
+    // Initialize the actual chart
+    let simulatorChart = new Chart(ctx, {
+        type: 'line',
+        data: data
+    });
 </script>
 {% endblock %}

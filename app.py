@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, g
+from flask import Flask, render_template, session, g, json
 from flask_debugtoolbar import DebugToolbarExtension
 
 from itertools import accumulate
@@ -108,4 +108,7 @@ def simulator(year):
         }
         datasets.append(driver_obj)
 
-    return render_template('simulator.html', race_labels=season_races_abbrs, datasets=datasets)
+    json_race_labels = json.dumps(season_races_abbrs)
+    json_datasets = json.dumps(datasets)
+
+    return render_template('simulator.html', race_labels=json_race_labels, datasets=json_datasets)
