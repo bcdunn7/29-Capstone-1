@@ -1,7 +1,9 @@
 from flask import Flask, render_template, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 
-from models import db, connect_db, User, Season
+from itertools import groupby
+
+from models import db, connect_db, User, Season, Finish, Race
 
 # from helpers import is_logged_in
 
@@ -73,6 +75,31 @@ def simulator(year):
 
     # is_logged_in()
 
-    season = Season.query.get_or_404(year)
+    season_races = Race.query.filter(Race.season_year == year).all()
 
-    return render_template('simulator.html')
+    season_races_ids = [race.id for race in season_races]
+
+    season_races_abbrs = [race.abbreviation for race in season_races]
+    race_labels = season_races_abbrs.insert(0,'') # first data point will be 'before the season'
+
+
+    finishes = Finish.query.filter(Finish.race_id.in_(season_races_ids)).all()
+
+    # get useful data from Finishes
+    extrapolated_finishes = [(f.race_id, f.driver_id, f.points) for f in finishes]
+
+    # sort finishes to be passed into itertools groupby
+    sort_finishes = sorted(extrapolated_finishes, key=lambda fin: fin[1])
+
+    # initialize array to hold groupby results
+    driver_finishes_arrays = []
+
+    # group data by driver id
+    for key, group in groupby(sort_finishes, lambda fin: fin[1]):
+        driver_finishes_arrays.append({'label': key, 'data': list(group)})
+
+    
+
+    print(driver_finishes_arrays)
+
+    return render_template('simulator.html', race_labels=race_labels)
