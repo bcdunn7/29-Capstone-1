@@ -10,26 +10,9 @@
 {% endblock %}
 {% block javascript %}
 <script type="text/javascript">
-    //get data from Python/Flask
+    //get data from Python/Flask (used in chartLogic.js)
     let race_labels = JSON.parse({{ race_labels|tojson }});
     let datasets = JSON.parse({{ datasets|tojson }});
-    
-    // Get canvas/chart element
-    let ctx = document.getElementById('chartjs-simulator').getContext('2d');
-    
-    // set data
-    let data = {
-        labels: race_labels,
-        datasets: datasets
-    }
-    
-    // set options
-    let options = {}
-    
-    // Initialize the actual chart
-    let simulatorChart = new Chart(ctx, {
-        type: 'line',
-        data: data
-    });
 </script>
+<script src="/static/chartLogic.js"></script>
 {% endblock %}
