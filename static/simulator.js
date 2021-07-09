@@ -30,11 +30,7 @@ let simulatorChart = new Chart(ctx, {
                 position: 'top',
             },
             title: {
-                display: true,
-                text: "World Drivers' Championship",
-                font: {
-                    size: 35
-                }
+                display: false
             }
         },
         animation: {
