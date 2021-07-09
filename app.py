@@ -73,6 +73,9 @@ def simulator(year):
 
     # is_logged_in()
 
+    #check if season is available, 404 of not
+    season = Season.query.get_or_404(year)
+
     # pass in season year, get back list of 'race labels' and array of driver/finish data objects ("datasets")
     data = get_data_for_simulator(year)
     blurbs = get_blurbs_for_races(year)
