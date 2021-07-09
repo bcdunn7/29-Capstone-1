@@ -13,6 +13,7 @@
     //get data from Python/Flask (used in chartLogic.js)
     let race_labels = JSON.parse({{ race_labels|tojson }});
     let datasets = JSON.parse({{ datasets|tojson }});
+    let blurbs = JSON.parse({{ blurbs|tojson }})
 </script>
-<script src="/static/chartLogic.js"></script>
+<script src="/static/simulator.js"></script>
 {% endblock %}

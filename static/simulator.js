@@ -1,3 +1,5 @@
+// **********************************************
+// Line Chart (chart.js)
 // Get canvas/chart element
 let ctx = document.getElementById('chartjs-simulator').getContext('2d');
     
@@ -15,3 +17,12 @@ let simulatorChart = new Chart(ctx, {
     type: 'line',
     data: data
 });
+
+
+// **********************************************
+// Blurb Logic
+
+
+
+
+

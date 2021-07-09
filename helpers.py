@@ -1,18 +1,20 @@
 """Helper functions for app.py"""
 
+from flask import g, redirect, flash
+
 from models import Season, Race, Finish, Driver
 
 from itertools import accumulate
 
-# def is_logged_in():
-#     if not g.user:
-#         flash("Must login first!", "info")
-#         return redirect(url_for('login'))
+def is_logged_in():
+    if not g.user:
+        flash("Must login first!", "info")
+        return redirect(url_for('login'))
 
 def get_data_for_simulator(year):
     """Gathers data from postgres and manipulates it into a race labels array and a dataset array for the chart."""
 
-        # get season (to access season.drivers)
+    # get season (to access season.drivers)
     season = Season.query.get(year)
 
     # get races for that season
@@ -46,3 +48,17 @@ def get_data_for_simulator(year):
         datasets.append(driver_obj)
 
     return (season_races_abbrs,datasets)
+
+
+def get_blurbs_for_races(year):
+    """Gets race blurb data from postgres and returns an object.
+    
+        race_blurbs = {'BHR': "text text text", 'MON': "text text text", etc.}
+    """
+
+    # get races for this season
+    season_races = Race.query.filter(Race.season_year == year).all()
+
+    blurbs = {race.abbreviation: race.blurb for race in season_races if race.blurb != None}
+
+    return blurbs

@@ -3,7 +3,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db, User, Season, Finish, Race
 
-from helpers import get_data_for_simulator
+from helpers import get_data_for_simulator, get_blurbs_for_races
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///influenceF1'
@@ -75,9 +75,11 @@ def simulator(year):
 
     # pass in season year, get back list of 'race labels' and array of driver/finish data objects ("datasets")
     data = get_data_for_simulator(year)
+    blurbs = get_blurbs_for_races(year)
 
     # json information to pass though jinja using |tojson
     json_race_labels = json.dumps(data[0])
     json_datasets = json.dumps(data[1])
+    json_blurbs = json.dumps(blurbs)
 
-    return render_template('simulator.html', race_labels=json_race_labels, datasets=json_datasets)
+    return render_template('simulator.html', race_labels=json_race_labels, datasets=json_datasets, blurbs=blurbs)
