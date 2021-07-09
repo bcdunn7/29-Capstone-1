@@ -4,6 +4,8 @@ from flask import g, redirect, flash
 
 from models import Season, Race, Finish, Driver
 
+from colors import line_colors
+
 from itertools import accumulate
 
 def is_logged_in():
@@ -34,6 +36,9 @@ def get_data_for_simulator(year):
     # create datasets obj to pass to template and chart
     datasets = []
     for d in season.drivers:
+        # find driver color in line_colors_array
+        color = line_colors[year][d.code]
+
         # create data array (race finishing points) for each driver
         points = [0] #first value is before season, at zero points
         for fin in finishes:
@@ -43,6 +48,8 @@ def get_data_for_simulator(year):
         points_accum = list(accumulate(points))
         driver_obj = {
             'label': d.code,
+            'borderColor': color,
+            'backgroundColor': color,
             'data': points_accum
         }
         datasets.append(driver_obj)
