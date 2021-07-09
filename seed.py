@@ -1,5 +1,5 @@
 from app import app
-from models import db, Season, Driver, Race, Finish
+from models import db, Season, Driver, Race, Finish, Selected_Driver
 from abbreviations import race_abbrs
 import requests
 
@@ -95,7 +95,18 @@ def make_API_call_and_generate_data(year, drivers):
                 )
                 db.session.add(f)
 
-    #Commit all
+    # after both season and drives are added:
+    # add selected_drivers:
+    driver_ids = db.session.query(Driver.id).filter(Driver.code.in_(drivers)).all()
+
+    for d_id in driver_ids:
+        sd = Selected_Driver(
+            season_year = year,
+            driver_id = d_id[0]
+        )
+        db.session.add(sd)
+
+    # Commit all
     db.session.commit()
 
 

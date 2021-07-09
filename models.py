@@ -2,6 +2,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from sqlalchemy.orm import backref
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
@@ -73,6 +74,10 @@ class Season(db.Model):
 
     races = db.relationship('Race',
                 back_populates='season', cascade="all, delete-orphan")
+
+    drivers = db.relationship('Driver',
+                secondary='selected_drivers',
+                backref='seasons')
 
 
 class Race(db.Model):
@@ -185,3 +190,27 @@ class User_Points(db.Model):
     finish = db.relationship('Finish')
 
     user = db.relationship('User')
+
+
+class Selected_Driver(db.Model):
+    """Selected_Driver model for drivers to be studied within each season."""
+
+    __tablename__ = 'selected_drivers'
+
+    id = db.Column(db.Integer,
+                primary_key=True,
+                autoincrement=True)
+
+    season_year = db.Column(db.Integer,
+                db.ForeignKey('seasons.year', 
+                ondelete='CASCADE'),
+                nullable=False)
+
+    driver_id = db.Column(db.Integer,
+                db.ForeignKey('drivers.id', 
+                ondelete='CASCADE'),
+                nullable=False)
+
+    season = db.relationship('Season')
+
+    driver = db.relationship('Driver')
