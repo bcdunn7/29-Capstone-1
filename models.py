@@ -210,7 +210,3 @@ class Selected_Driver(db.Model):
                 db.ForeignKey('drivers.id', 
                 ondelete='CASCADE'),
                 nullable=False)
-
-    season = db.relationship('Season')
-
-    driver = db.relationship('Driver')
