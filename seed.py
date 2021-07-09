@@ -39,9 +39,14 @@ def make_API_call_and_generate_data(year, drivers):
     )
     db.session.add(s)
 
-    #Drivers
+    # Drivers
+    
+    # Get list of all drivers currently to see if they already exist in DB
+    all_drivers = Driver.query.all()
+    already_driver = [d.code for d in all_drivers]
+    
     for res in races[0]['Results']:
-        if res['Driver']['code'] in drivers:
+        if res['Driver']['code'] in drivers and res['Driver']['code'] not in already_driver:
             driv_data = res['Driver']
             d = Driver(
                 first_name = driv_data['givenName'],
