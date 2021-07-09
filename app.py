@@ -108,6 +108,7 @@ def simulator(year):
         }
         datasets.append(driver_obj)
 
+    # json information to pass though jinja using |tojson
     json_race_labels = json.dumps(season_races_abbrs)
     json_datasets = json.dumps(datasets)
 
