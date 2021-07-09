@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 
-from itertools import groupby
+from itertools import accumulate
 
 from models import db, connect_db, User, Season, Finish, Race
 
@@ -75,31 +75,37 @@ def simulator(year):
 
     # is_logged_in()
 
+    # get season (to access season.drivers)
+    season = Season.query.get(year)
+
+    # get races for that season
     season_races = Race.query.filter(Race.season_year == year).all()
 
+    # get abbreviations for those races and make them into a race_labels array
+    season_races_abbrs = [race.abbreviation for race in season_races]
+     # first data point will be 'before the season'
+    season_races_abbrs.insert(0,'')
+
+    # get id for season races in order to get finishes for season
     season_races_ids = [race.id for race in season_races]
 
-    season_races_abbrs = [race.abbreviation for race in season_races]
-    race_labels = season_races_abbrs.insert(0,'') # first data point will be 'before the season'
-
-
+    # get finishes for the season races
     finishes = Finish.query.filter(Finish.race_id.in_(season_races_ids)).all()
 
-    # get useful data from Finishes
-    extrapolated_finishes = [(f.race_id, f.driver_id, f.points) for f in finishes]
+    # create datasets obj to pass to template and chart
+    datasets = []
+    for d in season.drivers:
+        # create data array (race finishing points) for each driver
+        points = [0] #first value is before season, at zero points
+        for fin in finishes:
+            if fin.driver_id == d.id:
+                points.append(fin.points)
+        # values need to be accumulated for chart
+        points_accum = list(accumulate(points))
+        driver_obj = {
+            'label': d.code,
+            'data': points_accum
+        }
+        datasets.append(driver_obj)
 
-    # sort finishes to be passed into itertools groupby
-    sort_finishes = sorted(extrapolated_finishes, key=lambda fin: fin[1])
-
-    # initialize array to hold groupby results
-    driver_finishes_arrays = []
-
-    # group data by driver id
-    for key, group in groupby(sort_finishes, lambda fin: fin[1]):
-        driver_finishes_arrays.append({'label': key, 'data': list(group)})
-
-    
-
-    print(driver_finishes_arrays)
-
-    return render_template('simulator.html', race_labels=race_labels)
+    return render_template('simulator.html', race_labels=season_races_abbrs, datasets=datasets)
