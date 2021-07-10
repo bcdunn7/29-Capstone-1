@@ -1,10 +1,10 @@
 // **********************************************
-// Navigation Logic
+// Open Simulator Logic
 
 $('#open-simulator-btn').on('click', function() {
     $('#overview').addClass('d-none');
     $('#chart-div').removeClass('d-none');
-    $('#replay-season-btn').removeClass('d-none');
+    $('#modes-div').removeClass('d-none');
     initializeChart();
 })
 
@@ -52,7 +52,7 @@ function nextData(raceNo, separateData, raceLabels, chart) {
     for (let i = 0; i < chartData.datasets.length; i++) {
         chartData.datasets[i].data.push(separateData[i][raceNo])
     }
-    chart.update('active');
+    chart.update();
 }
 
 
@@ -125,6 +125,20 @@ $('#restart-replay-btn').on('click', function() {
     $('#next-race-btn').removeClass('d-none');
     $('#restart-replay-btn').addClass('d-none');
 
+})
+
+
+// **********************************************
+// Sandbox Logic
+
+$('#sandbox-btn').on('click', function() {
+
+    // create button for each manipulation point
+    for (race_abbr of Object.keys(blurbs)) {
+        $('#sandbox-btns-div').append(`<button id="sandbox-btn-${race_abbr}" class="btn btn-primary m-2">${race_abbr}</button>`);
+    }
+
+    $('#sandbox-btns-div').removeClass('d-none')
 })
 
 
