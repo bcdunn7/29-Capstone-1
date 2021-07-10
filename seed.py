@@ -136,7 +136,7 @@ s2007.headline = "Räikkönen 110 — Hamilton 109 — Alonso 109 — Massa 94
 db.session.add(s2007)
 
 bahrain_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'BHR').first()
-bahrain_2007.blurb = "Bahrain: After Bahrain, Alonso, Räikkönen and Hamilton were equal on points. The last time the top three were level on points was in 1950 after the Indianapolis 500. By finishing second, Hamilton became the first driver in Formula One history to finish on the podium in each of his first three Formula 1 Grands Prix; the previous record was two consecutive podium finishes, achieved by Peter Arundell in the 1964 season."
+bahrain_2007.blurb = "Bahrain: After the Bahrain Grand Prix, Alonso, Räikkönen and Hamilton were equal on points. The last time the top three were level on points was in 1950 after the Indianapolis 500. By finishing second, Hamilton became the first driver in Formula One history to finish on the podium in each of his first three Formula 1 Grands Prix; the previous record was two consecutive podium finishes, achieved by Peter Arundell in the 1964 season."
 db.session.add(bahrain_2007)
 
 spain_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'ESP').first()
