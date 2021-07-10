@@ -1,5 +1,5 @@
 from app import app
-from models import db, Season, Driver, Race, Finish, Selected_Driver
+from models import db, Season, Driver, Race, Finish, Selected_Driver, Change, Race_Change
 from abbreviations import race_abbrs
 import requests
 
@@ -144,36 +144,113 @@ spain_2007.blurb = "Spain: Massa won this race by almost seven seconds over the 
 db.session.add(spain_2007)
 
 monaco_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'MON').first()
-monaco_2007.blurb = "Monaco: Around the tight streets of Monaco, Kimi Räikkönen found himself in the barriers just pas the Swimming Pool Complex in the second qualifying stage, breaking his front-right suspension. The damage inflicted could not be repaired and he qualified sixteenth. Despite this horrendous qualifying performance, Räikkönen raced through the field to finish 8th gaining himself one championship point, the exact margin he ended up winning the Championship by."
+monaco_2007.blurb = "Monaco: Around the tight streets of Monaco, Kimi Räikkönen found himself in the barriers just past the Swimming Pool Complex in the second qualifying stage, breaking his front-right suspension. The damage inflicted could not be repaired and he qualified sixteenth. Despite this horrendous qualifying performance, Räikkönen raced through the field to finish 8th gaining himself one championship point, the exact margin he ended up winning the Championship by."
+monaco_2007.change_text = "Räikkönen does not quite race back to 8th from 16th, instead scores 0pts in 9th."
 db.session.add(monaco_2007)
 
 canada_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'CAN').first()
 canada_2007.blurb = "Canada: An early crash on lap 22 led to a pit-stop-brigade, but Felipe Massa accidentally left the pit lane while the red exit light was on, disqualifying him from the race. Although it's unclear where he would have finished, it's likely he could have picked up around 8 points if he had not been disqualified. Just a few laps from the finish line, Alonso was also overtaken by Takuma Sato around the final chicane scoring him only 2 points in 7th place instead of 3 points in 6th."
+canada_2007.change_text = "Massa is not DSQ'd and instead finishes 2nd with 8pts."
 db.session.add(canada_2007)
 
 france_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'FRA').first()
 france_2007.blurb = "France: In a race that favored the top teams (Massa, Hamilton, Räikkönen were the top three), Alonso was unable to complete a single lap in the final qualifying session (Q3) due to a gearbox issue. He only finished 7th with 2 points. Even a fourth place, which would have been easily achievable without his gearbox failure, would have scored him an additional 3 points and the title by the end of the year."
+france_2007.change_text = "No Q3 mishap for Alonso, instead finishes 4th with 5pts."
 db.session.add(france_2007)
 
 turkey_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'TUR').first()
 turkey_2007.blurb = "Turkey: Hamilton found himself in the middle of the race quickly chasing down Räikkönen in second, but a surprise puncture forced him to drop to 5th only scoring 4 points instead of the likely 8 points he would have scored after passing Räikkönen."
+turkey_2007.change_text = "Hamilton doesn't suffer a puncture and scores 8pts in 2nd."
 db.session.add(turkey_2007)
 
 italy_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'ITA').first()
 italy_2007.blurb = "Italy: Massa who has started well in 3rd, retired from the race after a suspension failure. This left Massa fourth in the title fight and behind the leader by 23 points, a margin he would never make up."
+italy_2007.change_text = "Massa avoids suspension issues and finishes 3rd with 6pts."
 db.session.add(italy_2007)
 
 japan_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'JPN').first()
-japan_2007.blurb = "Italy: Massa who has started well in 3rd, retired from the race after a suspension failure. This left Massa fourth in the title fight and behind the leader by 23 points, a margin he would never make up."
+japan_2007.blurb = "Japan: Alonso, who had begun the race in 2nd, struggled under wet conditions and aquaplaned into the wall on lap 41, forcing him to retire from the race, leaving a likely 8 points on the table."
+japan_2007.change_text = "Alonso keeps the car planted in the rain finishing in 2 with 8pts."
 db.session.add(japan_2007)
 
 china_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'CHN').first()
 china_2007.blurb = "China: Hamilton was now 12 points in the lead for the Drivers' Championship with only 2 races to complete. He was leading this race before struggling with tire ware in the wet conditions and needing to pit. On his way into the pit entry, however, Hamilton failed to surmount the sharp left-hander and beached his car in the gravel where he was unable to get his car going and suffered the first retirement of his F1 career, ultimately costing him the Drivers' Championship in his rookie season."
+china_2007.change_text = "Hamilton wins the race (10pts) instead of beaching the car on pit entry."
 db.session.add(china_2007)
 
 brazil_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'BRA').first()
 brazil_2007.blurb = "Brazil: Coming into the final race of the season, Hamilton was still leading the title fight with 107 points followed by Alonso (103) and Räikkönen (100). Lewis Hamilton also started the race ahead of title contenders Räikkönen and Alonso. But just a few laps into the race Hamilton suffered a gearbox issue and stalled the car for close to 30 seconds. By the time the Briton restarted his car, he was in 18th. He raced an arduous recovery drive finishing 7th and scoring 2 points. But Räikkönen who had capitalized by the current race leader Massa, won the race, scoring 10 points edging out both Hamilton and Alonso (109 points each) by 1 point, and winning the Drivers' Championship with 110 points. Hamilton lost the title in the final race of his rookie season after leading it since race 6. Räikkönen won the title after not leading the championship since the very first race of the season."
+brazil_2007.change_text = "Hamilton suffers no stalling gearbox and istead wins from pole (10pts)."
 db.session.add(brazil_2007)
+
+# s2007 changes
+# find s2007 drivers
+RAI = Driver.query.filter_by(code='RAI').first()
+HAM = Driver.query.filter_by(code='HAM').first()
+ALO = Driver.query.filter_by(code='ALO').first()
+MAS = Driver.query.filter_by(code='MAS').first()
+
+# function for making changes and race_change connections
+def add_change_and_race_change(season, race, driver, new_pos, new_poi):
+    new_change = Change(
+        season_year=season,
+        race_id=race.id,
+        driver_id=driver.id,
+        new_position=new_pos,
+        new_points=new_poi
+    )
+    db.session.add(new_change)
+    db.session.commit()
+
+    new_change_obj = Change.query.filter(Change.race_id == race.id, Change.driver_id == driver.id).first()
+
+    new_race_change = Race_Change(
+        race_id=race.id,
+        change_id=new_change_obj.id
+    )
+
+    db.session.add(new_race_change)
+    db.session.commit()
+
+# Monaco
+add_change_and_race_change(2007, monaco_2007, RAI, 9, 0)
+
+# Canada
+add_change_and_race_change(2007, canada_2007, MAS, 2, 8)
+add_change_and_race_change(2007, canada_2007, RAI, 5, 4)
+
+# France
+add_change_and_race_change(2007, france_2007, ALO, 4, 5)
+
+# Turkey
+add_change_and_race_change(2007, turkey_2007, HAM, 2, 8)
+add_change_and_race_change(2007, turkey_2007, RAI, 3, 6)
+add_change_and_race_change(2007, turkey_2007, ALO, 4, 5)
+
+# Italy
+add_change_and_race_change(2007, italy_2007, MAS, 3, 6)
+add_change_and_race_change(2007, italy_2007, RAI, 4, 5)
+
+# Japan
+add_change_and_race_change(2007, japan_2007, ALO, 2, 8)
+add_change_and_race_change(2007, japan_2007, RAI, 4, 5)
+add_change_and_race_change(2007, japan_2007, MAS, 7, 2)
+
+# China
+add_change_and_race_change(2007, china_2007, HAM, 1, 10)
+add_change_and_race_change(2007, china_2007, RAI, 2, 8)
+add_change_and_race_change(2007, china_2007, ALO, 3, 6)
+add_change_and_race_change(2007, china_2007, MAS, 4, 5)
+
+# Brazil
+add_change_and_race_change(2007, brazil_2007, HAM, 1, 10)
+add_change_and_race_change(2007, brazil_2007, RAI, 2, 8)
+add_change_and_race_change(2007, brazil_2007, ALO, 4, 5)
+add_change_and_race_change(2007, brazil_2007, MAS, 3, 6)
+
+
+
+
 
 
 # s2010

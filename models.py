@@ -31,7 +31,7 @@ class User(db.Model):
     password = db.Column(db.Text,
                 nullable=False)
 
-    user_points = db.relationship('User_Points', 
+    user_changes = db.relationship('User_Change', 
                 back_populates='user', cascade="all, delete-orphan")
 
     @classmethod
@@ -107,10 +107,16 @@ class Race(db.Model):
 
     blurb = db.Column(db.Text)
 
+    change_text = db.Column(db.Text)
+
     season = db.relationship('Season')
 
     finishes = db.relationship('Finish', 
                 back_populates='race', cascade="all, delete-orphan")
+
+    changes = db.relationship('Change',
+                secondary='race_changes',
+                backref='races')
 
 
 class Driver(db.Model):
@@ -164,35 +170,6 @@ class Finish(db.Model):
 
     race = db.relationship('Race')
 
-    user_points = db.relationship('User_Points', 
-                back_populates='finish', cascade="all, delete-orphan")
-
-
-class User_Points(db.Model):
-    """User_Points model for user manipulated point values."""
-
-    __tablename__ = 'user_points'
-
-    finish_id = db.Column(db.Integer,
-                db.ForeignKey('finishes.id', 
-                ondelete='CASCADE'),
-                primary_key=True)
-
-    user_id = db.Column(db.Integer,
-                db.ForeignKey('users.id',
-                ondelete='CASCADE'),
-                primary_key=True)
-
-    position = db.Column(db.Integer,
-                nullable=False)
-
-    points = db.Column(db.Float,
-                nullable=False)
-
-    finish = db.relationship('Finish')
-
-    user = db.relationship('User')
-
 
 class Selected_Driver(db.Model):
     """Selected_Driver model for drivers to be studied within each season."""
@@ -212,3 +189,80 @@ class Selected_Driver(db.Model):
                 db.ForeignKey('drivers.id', 
                 ondelete='CASCADE'),
                 nullable=False)
+
+
+class Change(db.Model):
+    """Chande model for manipulatable data points."""
+
+    __tablename__ = 'changes'
+
+    id = db.Column(db.Integer,
+                primary_key=True,
+                autoincrement=True)
+
+    season_year = db.Column(db.Integer,
+                db.ForeignKey('seasons.year', 
+                ondelete='CASCADE'),
+                nullable=False)
+
+    race_id = db.Column(db.Integer,
+                db.ForeignKey('races.id',
+                ondelete='CASCADE'),
+                nullable=False)
+
+    driver_id = db.Column(db.Integer,
+                db.ForeignKey('drivers.id', 
+                ondelete='CASCADE'),
+                nullable=False)
+
+    new_position = db.Column(db.Integer,
+                nullable=False)
+
+    new_points = db.Column(db.Float,
+                nullable=False)
+
+    season = db.relationship('Season')
+
+    race = db.relationship('Race')
+
+    driver = db.relationship('Driver')
+
+
+class Race_Change(db.Model):
+    """Model for a change for a given race."""
+
+    __tablename__ = 'race_changes'
+
+    race_id = db.Column(db.Integer,
+                db.ForeignKey('races.id', 
+                ondelete='CASCADE'),
+                primary_key=True)
+
+    change_id = db.Column(db.Integer,
+                db.ForeignKey('changes.id', 
+                ondelete='CASCADE'),
+                primary_key=True)
+
+    race = db.relationship('Race')
+
+    change = db.relationship('Change')
+
+
+class User_Change(db.Model):
+    """User_Change model for user manipulated values. Race_id is used since it functions as a grouping mechanism for the different changes."""
+
+    __tablename__ = 'user_changes'
+
+    race_id = db.Column(db.Integer,
+                db.ForeignKey('races.id', 
+                ondelete='CASCADE'),
+                primary_key=True)
+
+    user_id = db.Column(db.Integer,
+                db.ForeignKey('users.id',
+                ondelete='CASCADE'),
+                primary_key=True)
+
+    race = db.relationship('Race')
+
+    user = db.relationship('User')
