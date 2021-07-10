@@ -133,12 +133,11 @@ $('#restart-replay-btn').on('click', function() {
 
 $('#sandbox-btn').on('click', function() {
 
-    // create button for each manipulation point
-    for (race_abbr of Object.keys(blurbs)) {
-        $('#sandbox-btns-div').append(`<button id="sandbox-btn-${race_abbr}" class="btn btn-primary m-2">${race_abbr}</button>`);
+    for (race_id of Object.keys(change_texts)) {
+        $('#sandbox-toggles-div').append(`<div class='form-check form-switch'><input id=${race_id} data-race-abbr='${change_texts[race_id]['abbr']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${race_id}'>${change_texts[race_id]['abbr']}: ${change_texts[race_id]['change_text']}</label></div>`)
     }
 
-    $('#sandbox-btns-div').removeClass('d-none')
+    $('#sandbox-toggles-div').removeClass('d-none')
 })
 
 

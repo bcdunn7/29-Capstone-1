@@ -2,7 +2,7 @@
 
 from flask import g, redirect, flash
 
-from models import Season, Race, Finish, Driver
+from models import Season, Race, Finish, Change
 
 from colors import line_colors
 
@@ -55,6 +55,30 @@ def get_data_for_simulator(year):
         datasets.append(driver_obj)
 
     return (season_races_abbrs,datasets)
+
+
+def get_changes_data(year):
+    """Gets changes data from postgres and returns it."""
+
+    # find races with changes
+    season_races = Race.query.filter(Race.season_year == year).order_by(Race.id).all()
+    change_texts = {race.id: {'abbr': race.abbreviation,'change_text':race.change_text} for race in season_races if race.change_text != None}
+
+    print('***************************')
+    print(season_races,change_texts)
+
+    changes = []
+
+    season_changes = Change.query.filter_by(season_year=year).all()
+
+    for change in season_changes:
+        c = {'race': change.race.id,
+            'driver': change.driver.code,
+            'new_points': change.new_points
+        }
+        changes.append(c)
+
+    return (change_texts, changes)
 
 
 def get_blurbs_for_races(year):
