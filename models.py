@@ -72,6 +72,8 @@ class Season(db.Model):
 
     headline = db.Column(db.Text)
 
+    overview = db.Column(db.Text)
+
     races = db.relationship('Race',
                 back_populates='season', cascade="all, delete-orphan")
 

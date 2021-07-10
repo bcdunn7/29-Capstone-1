@@ -127,9 +127,14 @@ make_API_call_and_generate_data(2010, ['VET', 'ALO', 'WEB', 'HAM', 'BUT', 'MAS']
 
 #********************
 # Add non-API data
-# like headline for season, blurbs
+# like headline and overview for season, race blurbs
 
 # s2007
+s2007 = Season.query.get(2007)
+s2007.overview = "The 2007 F1 season saw the temporary retirement of F1 great Michael Schumacher, leaving Ferrari with an open seat. This seat was filled by the Finnish driver Kimi Räikkönen leaving his previous team McLaren with an open seat as well. This seat was taken by the 2005 and 2006 World Champion Fernando Alonso, leaving Renault after 5 years. The ever-great Ferrari of Räikkönen versus McLaren with their powerful MP4-22 chassis and the defending world Champion looked like the looming title fight, but it was not only Alonso who would prove to be successful in a McLaren. Alonso's teammate, rookie Lewis Hamilton would have a historic rookie season in F1 adding a third name to the title fight. Although ultimately falling away, Räikkönen's teammate Felipe Massa added a fourth challenger in the Drivers' Championship battel early on. With both veteran greats and rookie all-stars, the 2007 was one of the most intriguing and close fought drivers' titles in F1 history."
+s2007.headline = "Räikkönen 110 — Hamilton 109 — Alonso 109 — Massa 94"
+db.session.add(s2007)
+
 bahrain_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'BHR').first()
 bahrain_2007.blurb = "Bahrain: After Bahrain, Alonso, Räikkönen and Hamilton were equal on points. The last time the top three were level on points was in 1950 after the Indianapolis 500. By finishing second, Hamilton became the first driver in Formula One history to finish on the podium in each of his first three Formula 1 Grands Prix; the previous record was two consecutive podium finishes, achieved by Peter Arundell in the 1964 season."
 db.session.add(bahrain_2007)
