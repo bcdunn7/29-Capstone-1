@@ -85,4 +85,4 @@ def simulator(year):
     json_datasets = json.dumps(data[1])
     json_blurbs = json.dumps(blurbs)
 
-    return render_template('simulator.html', season=season, race_labels=json_race_labels, datasets=json_datasets, blurbs=blurbs)
+    return render_template('simulator.html', season=season, race_labels=json_race_labels, datasets=json_datasets, blurbs=json_blurbs)
