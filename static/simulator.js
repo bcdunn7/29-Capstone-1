@@ -1,5 +1,20 @@
 // **********************************************
+// Navigation Logic
+
+$('#open-simulator-btn').on('click', function() {
+    $('#overview').addClass('d-none');
+    $('#chart-div').removeClass('d-none');
+    $('#replay-season-btn').removeClass('d-none');
+    initializeChart();
+})
+
+
+// **********************************************
+// Blurb Logic
+
+// **********************************************
 // Line Chart (chart.js)
+
 // Get canvas/chart element
 let ctx = document.getElementById('chartjs-simulator').getContext('2d');
     
@@ -20,45 +35,38 @@ let options = {
 // initialize delayed for animation options below
 let delayed;
 // Initialize the actual chart
-let simulatorChart = new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
+function initializeChart() {
+    let simulatorChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: false
+                }
             },
-            title: {
-                display: false
+            animation: {
+                onComplete: () => {
+                  delayed = true;
+                },
+                delay: (context) => {
+                  let delay = 0;
+                  if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    delay = context.dataIndex * 200 + context.datasetIndex * 100;
+                  }
+                  return delay;
+                },
+            },
+            elements: {
+                line: {
+                    tension: 0.2,
+                    borderWidth: 2
+                }
             }
-        },
-        animation: {
-            onComplete: () => {
-              delayed = true;
-            },
-            delay: (context) => {
-              let delay = 0;
-              if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                delay = context.dataIndex * 200 + context.datasetIndex * 100;
-              }
-              return delay;
-            },
-        },
-        elements: {
-            line: {
-                tension: 0.2,
-                borderWidth: 2
-            }
-        }
-      },
-});
-
-
-// **********************************************
-// Blurb Logic
-
-
-
-
-
+          },
+    });
+}

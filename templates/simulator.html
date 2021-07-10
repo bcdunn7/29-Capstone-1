@@ -1,14 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-8 text-center">
-            <div class="h2">{{ season }} World Drivers' Championship</div>
-            <div id="overview">
-                <p>The 2007 F1 season saw the temporary retirement of F1 great Michael Schumacher, leaving Ferrari with an open seat. This seat was filled by the Finnish driver Kimi Räikkönen leaving his previous team McLaren with an open seat as well. This seat was taken by the 2005 and 2006 World Champion Fernando Alonso, leaving Renault after 5 years. The ever-great Ferrari of Räikkönen versus McLaren with their powerful MP4-22 chassis and the defending world Champion looked like the looming title fight, but it was not only Alonso who would prove to be successful in a McLaren. Alonso's teammate, rookie Lewis Hamilton would have a historic rookie season in F1 adding a third name to the title fight. Although ultimately falling away, Räikkönen's teammate Felipe Massa added a fourth challenger in the Drivers' Championship battel early on. With both veteran greats and rookie all-stars, the 2007 was one of the most intriguing and close fought Drivers' titles in F1 history.</p>
-            </div>
-            <canvas id="chartjs-simulator" height="200" width="300" aria-label="Simulator Graph" role="img"></canvas>
+    <div class="row justify-content-center align-items-center">
+
+        <!-- left col: btns -->
+        <div class="col-2">
+            <button id="replay-season-btn" class="btn btn-success btn-lg d-none">Replay Season</button>
         </div>
+
+        <!-- center col: heading, chart, blurbs -->
+        <div class="col-8 text-center">
+            <div class="h2">{{ season.year }} World Drivers' Championship</div>
+            <div class="h6 m-3">{{season.headline}}</div>
+            <div id="overview" class="m-5">
+                <p>{{season.overview}}</p>
+                    <button id="open-simulator-btn" class="btn btn-primary btn-lg col-12 mt-3">Open Simulator</button>
+            </div>
+            <div id="chart-div" class="d-none">
+                <canvas id="chartjs-simulator" height="180" width="300" aria-label="Simulator Graph" role="img"></canvas>
+            </div>
+            <div id="blurb-div" class="d-none">
+                <p id="blurb-p"></p>
+            </div>
+        </div>
+
+        <!-- right col -->
+        <div class="col-2"></div>
     </div>
 </div>
 {% endblock %}
@@ -19,5 +36,6 @@
     let datasets = JSON.parse({{ datasets|tojson }});
     let blurbs = JSON.parse({{ blurbs|tojson }})
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="/static/simulator.js"></script>
 {% endblock %}
