@@ -20,7 +20,7 @@ def get_data_for_simulator(year):
     season = Season.query.get(year)
 
     # get races for that season
-    season_races = Race.query.filter(Race.season_year == year).all()
+    season_races = Race.query.filter(Race.season_year == year).order_by(Race.round).all()
 
     # get abbreviations for those races and make them into a race_labels array
     season_races_abbrs = [race.abbreviation for race in season_races]
