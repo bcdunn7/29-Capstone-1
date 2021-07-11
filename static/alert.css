@@ -1,0 +1,52 @@
+#changes-saved {
+    display: inline-block;
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+    width: fit-content;
+    overflow: hidden;
+}
+
+#flash-div {
+    display: inline-block;
+    position: fixed;
+    bottom: 10px;
+    left: -380px;
+    width: fit-content;
+    animation: alert 6s;
+    animation-delay: 0.5s;
+    overflow: hidden;
+}
+
+@keyframes alert {
+    0% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(400px);
+    }
+    30% {
+        transform: translateX(400px);
+    }
+    32% {
+        transform: translateX(400px) rotate(-4deg);
+    }
+    34% {
+        transform: translateX(400px) rotate(4deg);
+    }
+    36% {
+        transform: translateX(400px) rotate(-4deg);
+    }
+    38% {
+        transform: translateX(400px) rotate(4deg);
+    }
+    40% {
+        transform: translateX(400px) rotate(0deg);
+    }
+    60% {
+        transform: translateX(400px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
