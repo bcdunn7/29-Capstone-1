@@ -217,7 +217,7 @@ add_change_and_race_change(2007, monaco_2007, RAI, 9, 0)
 
 # Canada
 add_change_and_race_change(2007, canada_2007, MAS, 2, 8)
-add_change_and_race_change(2007, canada_2007, RAI, 5, 4)
+add_change_and_race_change(2007, canada_2007, RAI, 6, 3)
 
 # France
 add_change_and_race_change(2007, france_2007, ALO, 4, 5)

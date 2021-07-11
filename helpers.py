@@ -62,7 +62,11 @@ def get_changes_data(year):
 
     # find races with changes
     season_races = Race.query.filter(Race.season_year == year).order_by(Race.id).all()
-    change_texts = {race.id: {'abbr': race.abbreviation,'change_text':race.change_text} for race in season_races if race.change_text != None}
+    change_texts = {race.id: {
+                        'abbr': race.abbreviation,
+                        'change_text':race.change_text,
+                        'round': race.round} 
+                    for race in season_races if race.change_text != None}
 
     print('***************************')
     print(season_races,change_texts)

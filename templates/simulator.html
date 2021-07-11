@@ -44,11 +44,11 @@
     //get data from Python/Flask (used in chartLogic.js)
     let raceLabels = JSON.parse({{ race_labels|tojson }});
     let raceDatasets = JSON.parse({{ datasets|tojson }});
-    // need a second one to reference for manipulation. Can't simply clone due to nested arrays/objects
     let manipDatasets = JSON.parse({{ datasets|tojson }});
-    let blurbs = JSON.parse({{ blurbs|tojson }})
-    let change_texts = JSON.parse({{ change_texts|tojson }})
-    let changes = JSON.parse({{ changes|tojson }})
+    let refDatasets = JSON.parse({{ datasets|tojson }});
+    let blurbs = JSON.parse({{ blurbs|tojson }});
+    let change_texts = JSON.parse({{ change_texts|tojson }});
+    let changes = JSON.parse({{ changes|tojson }});
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="/static/simulator.js"></script>

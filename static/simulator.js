@@ -131,13 +131,102 @@ $('#restart-replay-btn').on('click', function() {
 // **********************************************
 // Sandbox Logic
 
+// On 'sandbox' create manipulatable toggles
 $('#sandbox-btn').on('click', function() {
 
     for (race_id of Object.keys(change_texts)) {
-        $('#sandbox-toggles-div').append(`<div class='form-check form-switch'><input id=${race_id} data-race-abbr='${change_texts[race_id]['abbr']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${race_id}'>${change_texts[race_id]['abbr']}: ${change_texts[race_id]['change_text']}</label></div>`)
+        $('#sandbox-toggles-div').append(`<div class='form-check form-switch'><input id=${race_id} data-round='${change_texts[race_id]['round']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${race_id}'>${change_texts[race_id]['abbr']}: ${change_texts[race_id]['change_text']}</label></div>`)
     }
 
     $('#sandbox-toggles-div').removeClass('d-none')
+})
+
+
+// function to manipulate race data based on toggle
+function manipulate_race_data(race_id, round, chart) {
+    let newDatasets = chart.data.datasets;
+    // find all race changes for this race
+    let race_changes = [];
+    for (i in changes) {
+        if (changes[i]['race'] === race_id) {
+            race_changes.push(changes[i])
+        }
+    }
+    // change the data
+    for (i in race_changes) {
+        for (j in newDatasets) {
+            if (race_changes[i]['driver'] === newDatasets[j]['label']) {
+                let points = newDatasets[j]['data'];
+
+                // need to find difference between original score and new score
+                let new_pnt = race_changes[i]['new_points'];
+                let old_pnt = (points[round]-points[round-1]);
+                let diff = new_pnt-old_pnt;
+
+                // update points based on difference
+                let new_points = points.map(function(pnt, i){
+                    if (i >= round) {
+                        return (pnt+diff);
+                    }
+                    else return pnt;
+                })
+
+                chart.data.datasets[j].data = new_points;
+            }
+        }
+    }
+    chart.update();
+}
+
+// function to undo manipulation on 'uncheck'
+function undo_race_data_manipulation(race_id, round, chart) {
+    //current datasets
+    let currDatasets = chart.data.datasets;
+    // find all race changes for this race
+    let race_changes = [];
+    for (i in changes) {
+        if (changes[i]['race'] === parseInt(race_id)) {
+            race_changes.push(changes[i])
+        }
+    }
+    // change the data back
+    for (i in race_changes) {
+        for (j in currDatasets) {
+            if (race_changes[i]['driver'] === refDatasets[j]['label']) {
+                let points = currDatasets[j]['data'];
+
+                // find original value in order to find difference
+                let orig_points = refDatasets[j]['data'];
+
+                let orig_pnt = (orig_points[round]-orig_points[round-1]);
+                let adj_pnt = race_changes[i]['new_points'];
+                let diff = orig_pnt-adj_pnt;
+
+                // update data
+                let new_points = points.map(function(pnt, i) {
+                    if (i >= round) {
+                        return (pnt+diff)
+                    }
+                    else return pnt;
+                })
+
+                chart.data.datasets[j].data = new_points;
+            }
+        }
+    }
+    chart.update()
+}
+
+// event listener for toggle changes
+$('#sandbox-toggles-div').on('change', '.form-check-input', function() {
+    let race_id = parseInt(this.id);
+    let round = parseInt(this.dataset.round);
+    if(this.checked) {
+        manipulate_race_data(race_id, round, simulatorChart)
+    }
+    if(!this.checked) {
+        undo_race_data_manipulation(race_id, round, simulatorChart)
+    }
 })
 
 
