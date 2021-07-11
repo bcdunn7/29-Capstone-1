@@ -1,12 +1,12 @@
-from flask import Flask, render_template, session, g, json, flash, redirect
+from flask import Flask, render_template, session, g, json, flash, redirect, request
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from models import db, connect_db, User, Season, Finish, Race
+from models import db, connect_db, User, Season, User_Change, Race
 
 from forms import UserForm
 
-from helpers import get_data_for_simulator, get_blurbs_for_races, get_changes_data
+from helpers import not_logged_in, get_data_for_simulator, get_blurbs_for_races, get_changes_data
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///influenceF1'
@@ -19,6 +19,7 @@ db.create_all()
 app.config['SECRET_KEY'] = "secret"
 
 debug = DebugToolbarExtension(app)
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 CURR_USER_KEY = "current_user"
 
@@ -32,7 +33,6 @@ def add_user_to_g():
 
     if CURR_USER_KEY in session: 
         g.user = User.query.get(session[CURR_USER_KEY])
-
     else:
         g.user = None
 
@@ -56,7 +56,6 @@ def session_logout():
 @app.route('/')
 def homepage():
     """Homepage with info and demo of app."""
-
     return render_template('home.html')
 
 
@@ -86,7 +85,7 @@ def signup():
             )
             db.session.commit()
         except IntegrityError:
-            flash("Username already taken", "warning")
+            form.username.errors.append('Username Already Taken')
             return render_template('users/signup.html', form=form)
 
         session_login(user)
@@ -111,7 +110,8 @@ def login():
             flash(f"Welcome back, {user.username}", "info")
             return redirect('/')
         else:
-            flash("Invalid credentials", "danger")
+            form.username.errors.append("Invalid Credentials")
+            form.password.errors.append("Invalid Credentials")
 
     return render_template('users/login.html', form=form)
 
@@ -134,8 +134,9 @@ def logout():
 def simulator(year):
     """Main functionality page of application: show simulator."""
 
-    # is_logged_in()
-
+    if (not_logged_in()):
+        return redirect('/login')
+    
     #check if season is available, 404 of not
     season = Season.query.get_or_404(year)
 
@@ -152,3 +153,36 @@ def simulator(year):
     json_changes = json.dumps(changes[1])
 
     return render_template('simulator.html', season=season, race_labels=json_race_labels, datasets=json_datasets, blurbs=json_blurbs, change_texts=json_change_texts, changes=json_changes)
+
+
+# Accept JSON info and save to DB
+@app.route('/simulator/save', methods=['POST'])
+def save_toggles():
+    """Accepts a json array of race_ids and saves user/race connections to db."""
+
+    if (not_logged_in()):
+        return redirect('/login')
+
+    race_ids = request.json["raceIds"]
+    year = request.json["year"]
+
+    # delete all toggle info for this user and season which handles both duplicates and untoggles
+    season_races = Race.query.filter(Race.season_year == year).all()
+
+    season_ids = [race.id for race in season_races]
+
+    season_user_changes = User_Change.query.filter(User_Change.race_id.in_(season_ids), User_Change.user_id == g.user.id).delete()
+    db.session.commit()
+
+    # add new User Changes
+    if len(race_ids):
+        for id in race_ids:
+            new_user_change = User_Change(
+                race_id=id,
+                user_id=g.user.id
+            )
+            db.session.add(new_user_change)
+
+        db.session.commit()
+
+    return json.jsonify("Changes Saved!")

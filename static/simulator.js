@@ -232,8 +232,39 @@ $('#sandbox-toggles-div').on('change', '.form-check-input', function() {
 
 
 $('#save-btn').on('click', function(){
-    //save to user account here.
+    // get race ids for toggled races
+    let toggles = Array.from($('.form-check-input'))
+    
+    let raceIds = toggles.reduce(function(ids, tog) {
+        if (tog.checked) {
+            ids.push(tog.id)
+        }
+        return ids
+    }, [])
+
+    // get season year
+    let heading = document.querySelector('#season-heading');
+    let year = heading.dataset.year;
+
+    // need to run even if empty, because untoggles needs to be marked too
+    postUserChanges(raceIds, year);
+
+    changesSaved()
 })
+
+async function postUserChanges(raceIds, year) {
+    let resp = await axios.post('/simulator/save', {raceIds:raceIds, year:year})
+}
+
+
+function changesSaved(){
+    console.log('test')
+    $('#changes-saved').removeClass('d-none');
+    $('#changes-saved').delay(1250).fadeTo(500, 0, function(){
+        this.classList.add('d-none');
+        this.setAttribute('style', "")
+    });
+}
 
 // **********************************************
 // Line Chart (chart.js)

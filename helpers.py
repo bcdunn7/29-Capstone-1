@@ -8,10 +8,11 @@ from colors import line_colors
 
 from itertools import accumulate
 
-def is_logged_in():
+def not_logged_in():
     if not g.user:
-        flash("Must login first!", "info")
-        return redirect(url_for('login'))
+        flash("Must login first!", "warning")
+        return True
+
 
 def get_data_for_simulator(year):
     """Gathers data from postgres and manipulates it into a race labels array and a dataset array for the chart."""
@@ -67,9 +68,6 @@ def get_changes_data(year):
                         'change_text':race.change_text,
                         'round': race.round} 
                     for race in season_races if race.change_text != None}
-
-    print('***************************')
-    print(season_races,change_texts)
 
     changes = []
 

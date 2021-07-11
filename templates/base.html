@@ -10,6 +10,7 @@
     <link rel="stylesheet"
     href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/nav.css">
+    <link rel="stylesheet" href="/static/alert.css">
 </head>
 <body>
     <!-- Nav side bar -->
@@ -67,8 +68,11 @@
                 </nav>
                 <div id="flash-div" class="container">
                     {% for category, message in get_flashed_messages(with_categories=True) %}
-                    <div class="alert alert-{{ category }}">{{ message }}<button type="submit" class="btn bg-transparent">X</button></div>
+                    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
                     {% endfor %}
+                </div>
+                <div id="changes-saved" class="container d-none">
+                    <div class="alert alert-success" role="alert">Changes Saved!</div>
                 </div>
             </div>
         </div>
@@ -78,6 +82,7 @@
     {% block javascript%}
     {% endblock %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="/static/sidebar.js"></script>
 </body>
 </html>

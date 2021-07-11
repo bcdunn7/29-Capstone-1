@@ -14,7 +14,7 @@
 
         <!-- center col: heading, chart, blurbs -->
         <div class="col-8 text-center">
-            <div class="h2">{{ season.year }} World Drivers' Championship</div>
+            <div id="season-heading" data-year={{season.year}} class="h2">{{ season.year }} World Drivers' Championship</div>
             <div class="h6 m-3">{{season.headline}}</div>
             <div id="overview" class="m-5">
                 <p>{{season.overview}}</p>
@@ -27,7 +27,7 @@
             </div>
             <div id="save-btn-div" class="d-none m-2">
                 <button id="save-btn" class="btn btn-info col-12">Save</button>
-                <small><i>This will save the current toggle arrangement to your account.</i></small>
+                <small><i>This will save the current toggle arrangement to your account</i></small>
             </div>
             <div id="replay-btns-div" class="d-none m-2">
                 <button id="next-race-btn" class="btn btn-info btn-lg text-light">Next Race</button>
