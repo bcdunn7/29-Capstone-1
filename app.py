@@ -1,7 +1,10 @@
-from flask import Flask, render_template, session, g, json
+from flask import Flask, render_template, session, g, json, flash, redirect
 from flask_debugtoolbar import DebugToolbarExtension
+from sqlalchemy.exc import IntegrityError
 
 from models import db, connect_db, User, Season, Finish, Race
+
+from forms import UserForm
 
 from helpers import get_data_for_simulator, get_blurbs_for_races, get_changes_data
 
@@ -62,6 +65,66 @@ def tutorial():
     """Tutorial page explaining the app and how the simulator works."""
 
     return render_template('tutorial.html')
+
+# ***********************************************
+# Users
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    """Handle user signup.
+    
+    On get, show form for user signup.
+    
+    On post, create new user and add to DB and redirect to home. """
+
+    form = UserForm()
+
+    if form.validate_on_submit():
+        try:
+            user = User.signup(
+                username=form.username.data,
+                password=form.password.data
+            )
+            db.session.commit()
+        except IntegrityError:
+            flash("Username already taken", "warning")
+            return render_template('users/signup.html', form=form)
+
+        session_login(user)
+        flash("Welcome!", "info")
+        return redirect('/')
+    
+    else:
+        return render_template('users/signup.html', form=form)
+
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    """Log in user."""
+
+    form = UserForm()
+
+    if form.validate_on_submit():
+        user = User.authenticate(form.username.data, form.password.data)
+
+        if user:
+            session_login(user)
+            flash(f"Welcome back, {user.username}", "info")
+            return redirect('/')
+        else:
+            flash("Invalid credentials", "danger")
+
+    return render_template('users/login.html', form=form)
+
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    """Logout user"""
+
+    session_logout()
+
+    flash("Successfully logged out.", "info")
+
+    return redirect('/')
 
 
 # ***********************************************

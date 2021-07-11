@@ -32,11 +32,21 @@
                             <a href="/simulator/2010" class="nav-link">2010</a>
                         </nav>
                     </div>
-                    <div id="nav-user-row" class="row">
+                    <div id="nav-user-row" class="row justify-content-center">
                         <ul class="nav justify-content-center">
-                            <a href="#" class="nav-link">Login</a>
-                            <a href="#" class="nav-link">Signup</a>
+                            {% if g.user %}
+                            <form action="/logout" method="POST">
+                                <button type="submit" class="btn bg-transparent nav-link">
+                                    Logout
+                                </button>
+                            </form>
+                            <a href="#" class="nav-link">Profile</a>
+                            {% else %}
+                            <a href="/login" class="nav-link">Login</a>
+                            <a href="/signup" class="nav-link">Signup</a>
+                            {% endif %}
                         </ul>
+                        <small>Currently signed in: {{g.user.username}}</small>
                     </div>
                 </div>
             </div>
@@ -55,6 +65,11 @@
                         <button id="sidebar-toggle-open" class="btn btn-sm btn-primary m-1">Menu</button>
                     </div>
                 </nav>
+                <div id="flash-div" class="container">
+                    {% for category, message in get_flashed_messages(with_categories=True) %}
+                    <div class="alert alert-{{ category }}">{{ message }}<button type="submit" class="btn bg-transparent">X</button></div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

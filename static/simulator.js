@@ -138,7 +138,8 @@ $('#sandbox-btn').on('click', function() {
         $('#sandbox-toggles-div').append(`<div class='form-check form-switch'><input id=${race_id} data-round='${change_texts[race_id]['round']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${race_id}'>${change_texts[race_id]['abbr']}: ${change_texts[race_id]['change_text']}</label></div>`)
     }
 
-    $('#sandbox-toggles-div').removeClass('d-none')
+    $('#sandbox-toggles-div').removeClass('d-none');
+    $('#save-btn-div').removeClass('d-none');
 })
 
 
@@ -229,6 +230,10 @@ $('#sandbox-toggles-div').on('change', '.form-check-input', function() {
     }
 })
 
+
+$('#save-btn').on('click', function(){
+    //save to user account here.
+})
 
 // **********************************************
 // Line Chart (chart.js)
