@@ -2,7 +2,7 @@
 
 from flask import g, redirect, flash
 
-from models import Season, Race, Finish, Change
+from models import Season, Race, Finish, Change, User_Change
 
 from colors import line_colors
 
@@ -82,6 +82,18 @@ def get_changes_data(year):
 
     return (change_texts, changes)
 
+
+def get_user_changes(year):
+    """Gets all user changes for a given year to load them in the simulator."""
+
+    #get race ids for given season
+    season_races = Race.query.filter(Race.season_year == year).all()
+    race_ids = [race.id for race in season_races]
+
+    user_changes_objs = User_Change.query.filter(User_Change.race_id.in_(race_ids), User_Change.user_id == g.user.id).all()
+
+    user_changes = [UC.race_id for UC in user_changes_objs]
+    return user_changes
 
 def get_blurbs_for_races(year):
     """Gets race blurb data from postgres and returns an object.

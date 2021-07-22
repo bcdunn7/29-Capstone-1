@@ -138,6 +138,12 @@ $('#sandbox-btn').on('click', function() {
         $('#sandbox-toggles-div').append(`<div class='form-check form-switch'><input id=${race_id} data-round='${change_texts[race_id]['round']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${race_id}'>${change_texts[race_id]['abbr']}: ${change_texts[race_id]['change_text']}</label></div>`)
     }
 
+    // toggle changes that the user has previously saved
+    for (i in userChanges) {
+        let toggle = document.getElementById(`${userChanges[i]}`)
+        toggle.checked = true;
+    }
+
     $('#sandbox-toggles-div').removeClass('d-none');
     $('#save-btn-div').removeClass('d-none');
 })

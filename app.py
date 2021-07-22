@@ -6,7 +6,7 @@ from models import db, connect_db, User, Season, User_Change, Race
 
 from forms import UserForm
 
-from helpers import not_logged_in, get_data_for_simulator, get_blurbs_for_races, get_changes_data
+from helpers import not_logged_in, get_data_for_simulator, get_blurbs_for_races, get_changes_data, get_user_changes
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///influenceF1'
@@ -140,10 +140,11 @@ def simulator(year):
     #check if season is available, 404 of not
     season = Season.query.get_or_404(year)
 
-    # pass in season year, get back list of 'race labels' and array of driver/finish data objects ("datasets")
+    # pass in season year, get back list of 'race labels' and array of driver/finish data objects ("datasets"), toggle options, and preset toggles
     data = get_data_for_simulator(year)
     blurbs = get_blurbs_for_races(year)
     changes = get_changes_data(year)
+    user_changes = get_user_changes(year)
 
     # json information to pass though jinja using |tojson
     json_race_labels = json.dumps(data[0])
@@ -151,8 +152,9 @@ def simulator(year):
     json_blurbs = json.dumps(blurbs)
     json_change_texts = json.dumps(changes[0])
     json_changes = json.dumps(changes[1])
+    json_user_changes = json.dumps(user_changes)
 
-    return render_template('simulator.html', season=season, race_labels=json_race_labels, datasets=json_datasets, blurbs=json_blurbs, change_texts=json_change_texts, changes=json_changes)
+    return render_template('simulator.html', season=season, race_labels=json_race_labels, datasets=json_datasets, blurbs=json_blurbs, change_texts=json_change_texts, changes=json_changes, user_changes=json_user_changes)
 
 
 # Accept JSON info and save to DB
