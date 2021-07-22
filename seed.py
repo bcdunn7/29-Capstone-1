@@ -183,6 +183,72 @@ brazil_2007.blurb = "Brazil: Coming into the final race of the season, Hamilton 
 brazil_2007.change_text = "Hamilton suffers no stalling gearbox and istead wins from pole (10pts)."
 db.session.add(brazil_2007)
 
+
+#s2010
+s2010 = Season.query.get(2010)
+s2010.overview = "Coming off an overly dominant 2009 season where Brawn ran away with the title, 2010 proved to be the exact opposite. The 2010 F1 season was one of the closest and most competitive Driver's Championships in F1 history. Throughout the season there were 6 drivers competing for the title with a record setting 10 changes of leadership in the title race. The title was variously led by every top-6 finisher except for Sebastian Vettel who did not lead the championship until the final race of the season where he finally led the championship and won the title. Vettel's win also set another record making him the youngest Drivers' Champion in F1 history at 23 years 134 years old. With previous F1 champions Michael Schumacher, Fernando Alonso, Jenson Button, Lewis Hamilton, and now Sebastian Vettel, the 2010 season often races to the top of F1 fans' favorite seasons."
+s2010.headline = "Vettel 256 — Alonso 252 — Webber 242 — Hamilton 240 — Button 214 — Massa 144"
+db.session.add(s2010)
+
+austrailia_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'AUS').first()
+austrailia_2010.blurb = "Austrailia: After starting on pole and leading the race in the early portions of the Grand Prix, Sebastian Vettel had a mysterious left-front wheel issue resulting in a loss to torque drive between the left front axel and the wheel which prompted a spin into the gravel and a retirement from the race. A win here would have meant after only two races Vettel would have led the championship, a status he did not end up achieving until the final race of the season."
+austrailia_2010.change_text = "Vettel suffers no mechanical issues, instead retains lead and wins (25pts)."
+db.session.add(austrailia_2010)
+
+malaysia_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'MAL').first()
+malaysia_2010.blurb = "Malaysia: After a wet qualifying shifted some of the title contenders down in the grid order, the Malaysian Grand Prix was a fairly calm affair until the penultimate lap of the race, when Alonso attempted a move for 8th place but ran wide and surprisingly caused his engine to blow up, retiring him from the race leaving him with 0 points instead of a possible 4."
+malaysia_2010.change_text = "Alonso makes the move for 8th stick, earning 4pts."
+db.session.add(malaysia_2010)
+
+spain_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'ESP').first()
+spain_2010.blurb = "Spain: Racing strong in 2nd on the penultimate lap of the race, Hamilton suffered a puncture and subsequent blowout punting him into the wall. He classified 14th with 0 points leaving what should have been a podium finish and 18 points on the table."
+spain_2010.change_text = "No blowout for Hamilton rather a podium finish with 18pts."
+db.session.add(spain_2010)
+
+turkey_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'TUR').first()
+turkey_2010.blurb = "Turkey: The Red Bull pair of Webber and Vettel were leading the race 1-2 before the pair collided on lap 40 forcing Vettel to retire and Webber to drop to 3rd by the end of the race. This accident promoted Hamilton to a race win, with Button in 2nd."
+turkey_2010.change_text = "Webber and Vettel do not collide leading home a Red Bull 1-2."
+db.session.add(turkey_2010)
+
+canada_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'CAN').first()
+canada_2010.blurb = "Canada: Massa struggled greatly in Canada leaving him in 15th with a dismal 0 points. This was the first in a series of three consecutive races where Massa would finish outside the points, ultimately putting him out of contention for the title for the remainder of the season."
+db.session.add(canada_2010)
+
+europe_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'EUR').first()
+europe_2010.blurb = "Europe: Webber, starting in second, suffered a serious of entanglements with other drivers ultimately culminating in an intense crash with Heikki Kovalainen, sending Webber's car airborne and careening into a tire barrier leaving him with a retirement instead of 18 points."
+europe_2010.change_text = "Webber avoids conflilcts with other drivers and retains his second place (18pts)."
+db.session.add(europe_2010)
+
+germany_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'GER').first()
+germany_2010.blurb = "Germany: As the race was nearing its final stages, Ferrari issued team-orders to drivers Massa and Alonso to let Alonso pass Massa for the lead. This extremely controversial move led to an investigation that served Ferrari with a $100,000 fine. But many paddock members and commentators thought both Alonso and Massa should have been stripped of their points as well, leaving them both with 0 points instead of 25 and 18."
+germany_2010.change_text = "Alonso and Massa are stripped of their points due to sporting violations."
+db.session.add(germany_2010)
+
+hungary_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'HUN').first()
+hungary_2010.blurb = "Hungary: Hamilton running in fourth suddenly retired with gearbox issues costing him 12 points and the lead of the championship which he had help for the previous four races."
+hungary_2010.change_text = "Hamilton avoids gearbox troubles and races home to fourth (12pts)."
+db.session.add(hungary_2010)
+
+italy_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'ITA').first()
+italy_2010.blurb = "Italy: After winning in Belgium, Hamilton once again reclaimed the lead of the championship. But at Monza, Hamilton and Massa came together on the first lap around Curva Grande and into the turn 4 chicane forcing the current leader of the title fight to retire leaving 10 or more points up for grabs."
+italy_2010.change_text = "Hamilton and Massa do not tangle and Hamilton picks up 10pts in 5th."
+db.session.add(italy_2010)
+
+singapore_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'SIN').first()
+singapore_2010.blurb = "Singapore: In the middle portion of the race, Hamilton was gaining on Webber and lined up an overtaking maneuver on the Raffles Boulevard straight. However, when the two entered the subsequent corner, Webber's front tire punctured Hamilton's rear tire forcing Hamilton's third retirement in four races and leaving another 15 points on the table."
+singapore_2010.change_text = "Webber does not puncture Hamilton's wheel, scoring Hamilton 15pts."
+db.session.add(singapore_2010)
+
+korea_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'KOR').first()
+korea_2010.blurb = "Korea: An extremely wet race with poor visibility saw Vettel leading for the majority of the Grand Prix. But on lap 46, a surprise engine failure forced Vettel to retire from the lead losing a possible 25 points. This meant that after the race, Alonso led the Drivers' Championship with 246 points. Red Bull's Webber and Vettel were 2nd and 3rd with 238 and 231 points respectively. Hamilton was not in 4th but was mathematically still in title contention, trailing Alonso by 24 points."
+korea_2010.change_text = "Vettel wins from pole, avoiding retirement from engine trouble."
+db.session.add(korea_2010)
+
+abu_dhabi_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'ABU').first()
+abu_dhabi_2010.blurb = "Abu Dhabi: Vettel led this race from pole followed by Hamilton and Alonso, with Webber in 5th. However, the Yas Marina Circuit in Abu Dhabi was (and still is) notorious for being difficult to overtake at, so track position is everything. Some early incidents saw Webber and Alonso pit relatively early, rejoining the field in 13th and 14th. Due to the difficult conditions at Yas Marina Alonso and Webber struggled lap after lap to pass Vitaly Petrov and were ultimately unsuccessful finishing in 7th and 8th. Such a poor performance from the two leading title contenders allowed race-winner Sebastian Vettel to win the Drivers' Championship by only 4 points ahead of Alonso."
+db.session.add(abu_dhabi_2010)
+
+
 # s2007 changes
 # find s2007 drivers
 RAI = Driver.query.filter_by(code='RAI').first()
@@ -249,11 +315,71 @@ add_change_and_race_change(2007, brazil_2007, ALO, 4, 5)
 add_change_and_race_change(2007, brazil_2007, MAS, 3, 6)
 
 
+# s2010 changes
+# find s2010 drivers
+VET = Driver.query.filter_by(code='VET').first()
+HAM = Driver.query.filter_by(code='HAM').first()
+ALO = Driver.query.filter_by(code='ALO').first()
+MAS = Driver.query.filter_by(code='MAS').first()
+BUT = Driver.query.filter_by(code='BUT').first()
+WEB = Driver.query.filter_by(code='WEB').first()
 
+# Austrailia
+add_change_and_race_change(2010, austrailia_2010, VET, 1, 25)
+add_change_and_race_change(2010, austrailia_2010, ALO, 5, 10)
+add_change_and_race_change(2010, austrailia_2010, WEB, 10, 1)
+add_change_and_race_change(2010, austrailia_2010, HAM, 7, 6)
+add_change_and_race_change(2010, austrailia_2010, BUT, 2, 18)
+add_change_and_race_change(2010, austrailia_2010, MAS, 3, 15)
 
+# Malaysia
+add_change_and_race_change(2010, malaysia_2010, ALO, 8, 4)
+add_change_and_race_change(2010, malaysia_2010, BUT, 9, 2)
 
+# Spain
+add_change_and_race_change(2010, spain_2010, HAM, 2, 18)
+add_change_and_race_change(2010, spain_2010, VET, 4, 12)
+add_change_and_race_change(2010, spain_2010, ALO, 3, 15)
+add_change_and_race_change(2010, spain_2010, MAS, 7, 6)
 
-# s2010
+# Turkey
+add_change_and_race_change(2010, turkey_2010, WEB, 1, 25)
+add_change_and_race_change(2010, turkey_2010, VET, 2, 18)
+add_change_and_race_change(2010, turkey_2010, HAM, 3, 15)
+add_change_and_race_change(2010, turkey_2010, BUT, 4, 12)
+add_change_and_race_change(2010, turkey_2010, ALO, 5, 10)
+add_change_and_race_change(2010, turkey_2010, MAS, 8, 4)
+
+# Europe
+add_change_and_race_change(2010, europe_2010, WEB, 2, 18)
+add_change_and_race_change(2010, europe_2010, ALO, 9, 2)
+add_change_and_race_change(2010, europe_2010, HAM, 3, 15)
+add_change_and_race_change(2010, europe_2010, BUT, 4, 12)
+
+# Germany
+add_change_and_race_change(2010, germany_2010, ALO, 99, 0)
+add_change_and_race_change(2010, germany_2010, MAS, 99, 0)
+
+# Hungary
+add_change_and_race_change(2010, hungary_2010, HAM, 4, 12)
+add_change_and_race_change(2010, hungary_2010, MAS, 5, 10)
+add_change_and_race_change(2010, hungary_2010, BUT, 9, 2)
+
+# Italy
+add_change_and_race_change(2010, italy_2010, HAM, 5, 10)
+add_change_and_race_change(2010, italy_2010, WEB, 7, 6)
+
+# Singapore
+add_change_and_race_change(2010, singapore_2010, HAM, 3, 15)
+add_change_and_race_change(2010, singapore_2010, WEB, 4, 12)
+add_change_and_race_change(2010, singapore_2010, BUT, 5, 10)
+add_change_and_race_change(2010, singapore_2010, MAS, 9, 2)
+
+# Korea
+add_change_and_race_change(2010, korea_2010, VET, 1, 25)
+add_change_and_race_change(2010, korea_2010, ALO, 2, 18)
+add_change_and_race_change(2010, korea_2010, HAM, 3, 15)
+
 
 # **********************
 #Commit all
