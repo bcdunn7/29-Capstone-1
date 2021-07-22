@@ -127,6 +127,42 @@ def logout():
     return redirect('/')
 
 
+@app.route('/profile')
+def show_profile():
+    """Profile page for user."""
+
+    if (not_logged_in()):
+        return redirect('/login')
+
+    return render_template('users/profile.html')
+
+
+@app.route('/profile', methods=['POST'])
+def delete_user():
+    """Deletes and log out user."""
+
+    session_logout()
+
+    User.query.filter(User.id == g.user.id).delete()
+    db.session.commit()
+
+    flash("User Successfully Deleted", "success")
+
+    return redirect('/')
+
+
+@app.route('/erase', methods=['POST'])
+def delete_user_data():
+    """Delete stored User_Changes for given user."""
+
+    User_Change.query.filter(User_Change.user_id == g.user.id).delete()
+    db.session.commit()
+
+    flash("Data Deleted", "info")
+
+    return redirect('/profile')
+
+
 # ***********************************************
 # Simulator
 
