@@ -1,5 +1,5 @@
 from app import app
-from models import db, Season, Driver, Race, Finish, Selected_Driver, Change, Race_Change
+from models import db, Season, Driver, Race, Finish, Selected_Driver, Change
 from abbreviations import race_abbrs
 import requests
 
@@ -256,8 +256,8 @@ HAM = Driver.query.filter_by(code='HAM').first()
 ALO = Driver.query.filter_by(code='ALO').first()
 MAS = Driver.query.filter_by(code='MAS').first()
 
-# function for making changes and race_change connections
-def add_change_and_race_change(season, race, driver, new_pos, new_poi):
+# function for making changes connections
+def add_change(season, race, driver, new_pos, new_poi):
     new_change = Change(
         season_year=season,
         race_id=race.id,
@@ -268,51 +268,42 @@ def add_change_and_race_change(season, race, driver, new_pos, new_poi):
     db.session.add(new_change)
     db.session.commit()
 
-    new_change_obj = Change.query.filter(Change.race_id == race.id, Change.driver_id == driver.id).first()
-
-    new_race_change = Race_Change(
-        race_id=race.id,
-        change_id=new_change_obj.id
-    )
-
-    db.session.add(new_race_change)
-    db.session.commit()
 
 # Monaco
-add_change_and_race_change(2007, monaco_2007, RAI, 9, 0)
+add_change(2007, monaco_2007, RAI, 9, 0)
 
 # Canada
-add_change_and_race_change(2007, canada_2007, MAS, 2, 8)
-add_change_and_race_change(2007, canada_2007, RAI, 6, 3)
+add_change(2007, canada_2007, MAS, 2, 8)
+add_change(2007, canada_2007, RAI, 6, 3)
 
 # France
-add_change_and_race_change(2007, france_2007, ALO, 4, 5)
+add_change(2007, france_2007, ALO, 4, 5)
 
 # Turkey
-add_change_and_race_change(2007, turkey_2007, HAM, 2, 8)
-add_change_and_race_change(2007, turkey_2007, RAI, 3, 6)
-add_change_and_race_change(2007, turkey_2007, ALO, 4, 5)
+add_change(2007, turkey_2007, HAM, 2, 8)
+add_change(2007, turkey_2007, RAI, 3, 6)
+add_change(2007, turkey_2007, ALO, 4, 5)
 
 # Italy
-add_change_and_race_change(2007, italy_2007, MAS, 3, 6)
-add_change_and_race_change(2007, italy_2007, RAI, 4, 5)
+add_change(2007, italy_2007, MAS, 3, 6)
+add_change(2007, italy_2007, RAI, 4, 5)
 
 # Japan
-add_change_and_race_change(2007, japan_2007, ALO, 2, 8)
-add_change_and_race_change(2007, japan_2007, RAI, 4, 5)
-add_change_and_race_change(2007, japan_2007, MAS, 7, 2)
+add_change(2007, japan_2007, ALO, 2, 8)
+add_change(2007, japan_2007, RAI, 4, 5)
+add_change(2007, japan_2007, MAS, 7, 2)
 
 # China
-add_change_and_race_change(2007, china_2007, HAM, 1, 10)
-add_change_and_race_change(2007, china_2007, RAI, 2, 8)
-add_change_and_race_change(2007, china_2007, ALO, 3, 6)
-add_change_and_race_change(2007, china_2007, MAS, 4, 5)
+add_change(2007, china_2007, HAM, 1, 10)
+add_change(2007, china_2007, RAI, 2, 8)
+add_change(2007, china_2007, ALO, 3, 6)
+add_change(2007, china_2007, MAS, 4, 5)
 
 # Brazil
-add_change_and_race_change(2007, brazil_2007, HAM, 1, 10)
-add_change_and_race_change(2007, brazil_2007, RAI, 2, 8)
-add_change_and_race_change(2007, brazil_2007, ALO, 4, 5)
-add_change_and_race_change(2007, brazil_2007, MAS, 3, 6)
+add_change(2007, brazil_2007, HAM, 1, 10)
+add_change(2007, brazil_2007, RAI, 2, 8)
+add_change(2007, brazil_2007, ALO, 4, 5)
+add_change(2007, brazil_2007, MAS, 3, 6)
 
 
 # s2010 changes
@@ -325,60 +316,60 @@ BUT = Driver.query.filter_by(code='BUT').first()
 WEB = Driver.query.filter_by(code='WEB').first()
 
 # Austrailia
-add_change_and_race_change(2010, austrailia_2010, VET, 1, 25)
-add_change_and_race_change(2010, austrailia_2010, ALO, 5, 10)
-add_change_and_race_change(2010, austrailia_2010, WEB, 10, 1)
-add_change_and_race_change(2010, austrailia_2010, HAM, 7, 6)
-add_change_and_race_change(2010, austrailia_2010, BUT, 2, 18)
-add_change_and_race_change(2010, austrailia_2010, MAS, 3, 15)
+add_change(2010, austrailia_2010, VET, 1, 25)
+add_change(2010, austrailia_2010, ALO, 5, 10)
+add_change(2010, austrailia_2010, WEB, 10, 1)
+add_change(2010, austrailia_2010, HAM, 7, 6)
+add_change(2010, austrailia_2010, BUT, 2, 18)
+add_change(2010, austrailia_2010, MAS, 3, 15)
 
 # Malaysia
-add_change_and_race_change(2010, malaysia_2010, ALO, 8, 4)
-add_change_and_race_change(2010, malaysia_2010, BUT, 9, 2)
+add_change(2010, malaysia_2010, ALO, 8, 4)
+add_change(2010, malaysia_2010, BUT, 9, 2)
 
 # Spain
-add_change_and_race_change(2010, spain_2010, HAM, 2, 18)
-add_change_and_race_change(2010, spain_2010, VET, 4, 12)
-add_change_and_race_change(2010, spain_2010, ALO, 3, 15)
-add_change_and_race_change(2010, spain_2010, MAS, 7, 6)
+add_change(2010, spain_2010, HAM, 2, 18)
+add_change(2010, spain_2010, VET, 4, 12)
+add_change(2010, spain_2010, ALO, 3, 15)
+add_change(2010, spain_2010, MAS, 7, 6)
 
 # Turkey
-add_change_and_race_change(2010, turkey_2010, WEB, 1, 25)
-add_change_and_race_change(2010, turkey_2010, VET, 2, 18)
-add_change_and_race_change(2010, turkey_2010, HAM, 3, 15)
-add_change_and_race_change(2010, turkey_2010, BUT, 4, 12)
-add_change_and_race_change(2010, turkey_2010, ALO, 5, 10)
-add_change_and_race_change(2010, turkey_2010, MAS, 8, 4)
+add_change(2010, turkey_2010, WEB, 1, 25)
+add_change(2010, turkey_2010, VET, 2, 18)
+add_change(2010, turkey_2010, HAM, 3, 15)
+add_change(2010, turkey_2010, BUT, 4, 12)
+add_change(2010, turkey_2010, ALO, 5, 10)
+add_change(2010, turkey_2010, MAS, 8, 4)
 
 # Europe
-add_change_and_race_change(2010, europe_2010, WEB, 2, 18)
-add_change_and_race_change(2010, europe_2010, ALO, 9, 2)
-add_change_and_race_change(2010, europe_2010, HAM, 3, 15)
-add_change_and_race_change(2010, europe_2010, BUT, 4, 12)
+add_change(2010, europe_2010, WEB, 2, 18)
+add_change(2010, europe_2010, ALO, 9, 2)
+add_change(2010, europe_2010, HAM, 3, 15)
+add_change(2010, europe_2010, BUT, 4, 12)
 
 # Germany
-add_change_and_race_change(2010, germany_2010, ALO, 99, 0)
-add_change_and_race_change(2010, germany_2010, MAS, 99, 0)
+add_change(2010, germany_2010, ALO, 99, 0)
+add_change(2010, germany_2010, MAS, 99, 0)
 
 # Hungary
-add_change_and_race_change(2010, hungary_2010, HAM, 4, 12)
-add_change_and_race_change(2010, hungary_2010, MAS, 5, 10)
-add_change_and_race_change(2010, hungary_2010, BUT, 9, 2)
+add_change(2010, hungary_2010, HAM, 4, 12)
+add_change(2010, hungary_2010, MAS, 5, 10)
+add_change(2010, hungary_2010, BUT, 9, 2)
 
 # Italy
-add_change_and_race_change(2010, italy_2010, HAM, 5, 10)
-add_change_and_race_change(2010, italy_2010, WEB, 7, 6)
+add_change(2010, italy_2010, HAM, 5, 10)
+add_change(2010, italy_2010, WEB, 7, 6)
 
 # Singapore
-add_change_and_race_change(2010, singapore_2010, HAM, 3, 15)
-add_change_and_race_change(2010, singapore_2010, WEB, 4, 12)
-add_change_and_race_change(2010, singapore_2010, BUT, 5, 10)
-add_change_and_race_change(2010, singapore_2010, MAS, 9, 2)
+add_change(2010, singapore_2010, HAM, 3, 15)
+add_change(2010, singapore_2010, WEB, 4, 12)
+add_change(2010, singapore_2010, BUT, 5, 10)
+add_change(2010, singapore_2010, MAS, 9, 2)
 
 # Korea
-add_change_and_race_change(2010, korea_2010, VET, 1, 25)
-add_change_and_race_change(2010, korea_2010, ALO, 2, 18)
-add_change_and_race_change(2010, korea_2010, HAM, 3, 15)
+add_change(2010, korea_2010, VET, 1, 25)
+add_change(2010, korea_2010, ALO, 2, 18)
+add_change(2010, korea_2010, HAM, 3, 15)
 
 
 # **********************

@@ -114,10 +114,6 @@ class Race(db.Model):
     finishes = db.relationship('Finish', 
                 back_populates='race', cascade="all, delete-orphan")
 
-    changes = db.relationship('Change',
-                secondary='race_changes',
-                backref='races')
-
 
 class Driver(db.Model):
     """Driver model."""
@@ -226,26 +222,6 @@ class Change(db.Model):
     race = db.relationship('Race')
 
     driver = db.relationship('Driver')
-
-
-class Race_Change(db.Model):
-    """Model for a change for a given race."""
-
-    __tablename__ = 'race_changes'
-
-    race_id = db.Column(db.Integer,
-                db.ForeignKey('races.id', 
-                ondelete='CASCADE'),
-                primary_key=True)
-
-    change_id = db.Column(db.Integer,
-                db.ForeignKey('changes.id', 
-                ondelete='CASCADE'),
-                primary_key=True)
-
-    race = db.relationship('Race')
-
-    change = db.relationship('Change')
 
 
 class User_Change(db.Model):
