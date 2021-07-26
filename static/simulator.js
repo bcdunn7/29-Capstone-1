@@ -88,6 +88,17 @@ $('#replay-season-btn').on('click', function() {
     raceNo++;
     showBlurbIfAvail(raceNo, raceLabels);
 
+    // button states
+    $('#sandbox-btn').removeClass('disabled');
+    $('#sandbox-btn').attr('aria-disable', 'true');
+    $('#replay-season-btn').addClass('disabled');
+    $('#replay-season-btn').attr('aria-disable', 'false');
+
+    // if switching from sandbox
+    $('#sandbox-toggles-div').addClass('d-none');
+    $('#sandbox-toggles-div').empty();
+    $('#save-btn-div').addClass('d-none');
+
     // show replay manipulation buttons
     $('#replay-btns-div').removeClass('d-none')
 })
@@ -146,6 +157,20 @@ $('#sandbox-btn').on('click', function() {
         let round = parseInt(toggle.dataset.round);
         manipulateRaceData(raceId, round, simulatorChart)
     }
+
+    // button states
+    $('#replay-season-btn').removeClass('disabled');
+    $('#replay-season-btn').attr('aria-disable', 'true');
+    $('#sandbox-btn').addClass('disabled');
+    $('#sandbox-btn').attr('aria-disable', 'false');
+
+    // if switching from replay season mode, hide divs
+    $('#replay-btns-div').addClass('d-none');
+    $('#blurb-div').addClass('d-none');
+    // and reset chart
+    simulatorChart.data.datasets = raceDatasets;
+    simulatorChart.data.labels = raceLabels;
+    simulatorChart.update();
 
     $('#sandbox-toggles-div').removeClass('d-none');
     $('#save-btn-div').removeClass('d-none');
