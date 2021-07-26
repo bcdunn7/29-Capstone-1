@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, session, g, json, flash, redirect, request
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
@@ -9,7 +11,8 @@ from forms import UserForm
 from helpers import not_logged_in, get_data_for_simulator, get_blurbs_for_races, get_changes_data, get_user_changes
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///influenceF1'
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    os.environ.get('DATABASE_URL', 'postgresql:///influenceF1'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
