@@ -1,15 +1,4 @@
 // **********************************************
-// Open Simulator Logic
-
-$('#open-simulator-btn').on('click', function() {
-    $('#overview').addClass('d-none');
-    $('#chart-div').removeClass('d-none');
-    $('#modes-div').removeClass('d-none');
-    initializeChart();
-})
-
-
-// **********************************************
 // Replay Season and Blurb Logic
 
 // raceNo of current race
@@ -74,7 +63,13 @@ let separateData;
 
 // Begin Replay Mode
 $('#replay-season-btn').on('click', function() {
+    initializeChart();
+    
     raceNo = 1;
+
+    $('#back-btn-form').removeClass('d-none');
+    $('#overview').addClass('d-none');
+    $('#chart-div').removeClass('d-none');
 
     // remove data from chart
     let initialDataset = getInitialDataset(manipDatasets);
@@ -87,17 +82,6 @@ $('#replay-season-btn').on('click', function() {
     nextData(raceNo, separateData, raceLabels, simulatorChart);
     raceNo++;
     showBlurbIfAvail(raceNo, raceLabels);
-
-    // button states
-    $('#sandbox-btn').removeClass('disabled');
-    $('#sandbox-btn').attr('aria-disable', 'true');
-    $('#replay-season-btn').addClass('disabled');
-    $('#replay-season-btn').attr('aria-disable', 'false');
-
-    // if switching from sandbox
-    $('#sandbox-toggles-div').addClass('d-none');
-    $('#sandbox-toggles-div').empty();
-    $('#save-btn-div').addClass('d-none');
 
     // show replay manipulation buttons
     $('#replay-btns-div').removeClass('d-none')
@@ -145,6 +129,12 @@ $('#restart-replay-btn').on('click', function() {
 // On 'sandbox' create manipulatable toggles
 $('#sandbox-btn').on('click', function() {
 
+    initializeChart();
+
+    $('#back-btn-form').removeClass('d-none');
+    $('#overview').addClass('d-none');
+    $('#chart-div').removeClass('d-none');
+
     for (raceId of Object.keys(changeTexts)) {
         $('#sandbox-toggles-div').append(`<div class='form-check form-switch'><input id=${raceId} data-round='${changeTexts[raceId]['round']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${raceId}'>${changeTexts[raceId]['abbr']}: ${changeTexts[raceId]['change_text']}</label></div>`)
     }
@@ -157,20 +147,6 @@ $('#sandbox-btn').on('click', function() {
         let round = parseInt(toggle.dataset.round);
         manipulateRaceData(raceId, round, simulatorChart)
     }
-
-    // button states
-    $('#replay-season-btn').removeClass('disabled');
-    $('#replay-season-btn').attr('aria-disable', 'true');
-    $('#sandbox-btn').addClass('disabled');
-    $('#sandbox-btn').attr('aria-disable', 'false');
-
-    // if switching from replay season mode, hide divs
-    $('#replay-btns-div').addClass('d-none');
-    $('#blurb-div').addClass('d-none');
-    // and reset chart
-    simulatorChart.data.datasets = raceDatasets;
-    simulatorChart.data.labels = raceLabels;
-    simulatorChart.update();
 
     $('#sandbox-toggles-div').removeClass('d-none');
     $('#save-btn-div').removeClass('d-none');

@@ -3,13 +3,11 @@
 <div class="container">
     <div class="row justify-content-center align-items-center">
 
-        <!-- left col: btns -->
+        <!-- left col -->
         <div class="col-2">
-            <div id="modes-div" class="d-none">
-                <div class="h3"><u>Modes</u></div>
-                <button id="replay-season-btn" class="btn btn-success btn-lg">Replay Season</button>
-                <button id="sandbox-btn" class="btn btn-secondary btn-lg">Sandbox</button>
-            </div>
+            <form id="back-btn-form" class="d-none">
+                <button id="sim-back-btn" class="btn btn-warning btn-sm">Back</button>
+            </form>
         </div>
 
         <!-- center col: heading, chart, blurbs -->
@@ -18,7 +16,14 @@
             <div class="h6 m-3">{{season.headline}}</div>
             <div id="overview" class="m-5">
                 <p>{{season.overview}}</p>
-                    <button id="open-simulator-btn" class="btn btn-primary btn-lg col-12 mt-3">Open Simulator</button>
+                    <div class="row">
+                        <div class="col-6">
+                            <button id="replay-season-btn" class="btn btn-primary btn-lg col-12 mt-3">Replay Season</button>
+                        </div>
+                        <div class="col-6">
+                            <button id="sandbox-btn" class="btn btn-primary btn-lg col-12 mt-3">Open Simulator</button>
+                        </div>
+                    </div>
             </div>
             <div id="chart-div" class="d-none">
                 <canvas id="chartjs-simulator" height="180" width="300" aria-label="Simulator Graph" role="img"></canvas>
