@@ -136,7 +136,7 @@ $('#sandbox-btn').on('click', function() {
     $('#chart-div').removeClass('d-none');
 
     for (raceId of Object.keys(changeTexts)) {
-        $('#sandbox-toggles-div').append(`<div class='form-check form-switch'><input id=${raceId} data-round='${changeTexts[raceId]['round']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${raceId}'>${changeTexts[raceId]['abbr']}: ${changeTexts[raceId]['change_text']}</label></div>`)
+        $('#sandbox-toggles-div').append(`<div class='form-check form-switch m-1'><input id=${raceId} data-round='${changeTexts[raceId]['round']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${raceId}'>${changeTexts[raceId]['abbr']}: ${changeTexts[raceId]['change_text']}</label></div>`)
     }
 
     // toggle changes that the user has previously saved
