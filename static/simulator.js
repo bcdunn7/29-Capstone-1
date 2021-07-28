@@ -167,7 +167,7 @@ function populateTable(chart) {
     let tableData = [];
 
     for (let i=0; i<chartDatasets.length; i++) {
-        tableData.push([chartDatasets[i].label, chartDatasets[i].data.slice(-1)[0]])
+        tableData.push([chartDatasets[i].label, chartDatasets[i].data.slice(-1)[0], chartDatasets[i].backgroundColor])
     }
 
     // sort tableData
@@ -175,15 +175,16 @@ function populateTable(chart) {
     tableData.sort(function(a,b) {
         return (b[1]-a[1]);
     })
-    console.log(tableData)
 
     // append sorted data to table
     let body = $('#table-body');
     body.empty()
 
     for (let i=0; i<tableData.length; i++) {
-        body.append(`<tr><th>${i}</th><td>${tableData[i][0]}</td><td>${tableData[i][1]}</td></tr>`)
+        body.append(`<tr><th>${i}</th><td><div class="color-div" style="background-color:${tableData[i][2]}"></div>${tableData[i][0]}</td><td>${tableData[i][1]}</td></tr>`)
     }
+
+    body.addClass('tbody-style');
 }
 
 
