@@ -46,6 +46,16 @@ function nextData(raceNo, separateData, raceLabels, chart) {
 }
 
 
+function previousData(chart) {
+    chart.data.labels.pop();
+    for (let i=0; i < chart.data.datasets.length; i++) {
+        chart.data.datasets[i].data.pop()
+    }
+    chart.update()
+    populateTable(simulatorChart);
+}
+
+
 // show a blurb if available
 function showBlurbIfAvail(raceNo, raceLabels) {
     if (raceLabels[raceNo-1] in blurbs) {
@@ -96,12 +106,26 @@ $('#next-race-btn').on('click', function() {
         nextData(raceNo, separateData, raceLabels, simulatorChart);
         raceNo++;
         showBlurbIfAvail(raceNo, raceLabels);
+
         if (raceNo === raceLabels.length) {
             $('#restart-replay-btn').removeClass('d-none');
             $('#next-race-btn').addClass('d-none');
         }
     }
 }) 
+
+
+$('#prev-race-btn').on('click', function() {
+    if (raceNo > 2) {
+        previousData(simulatorChart);
+        raceNo--;
+        showBlurbIfAvail(raceNo, raceLabels);
+        if (raceNo === raceLabels.length-1) {
+            $('#restart-replay-btn').addClass('d-none');
+            $('#next-race-btn').removeClass('d-none');
+        }
+    }
+})
 
 
 // Restart replay
