@@ -145,37 +145,37 @@ db.session.add(spain_2007)
 
 monaco_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'MON').first()
 monaco_2007.blurb = "Monaco: Around the tight streets of Monaco, Kimi Räikkönen found himself in the barriers just past the Swimming Pool Complex in the second qualifying stage, breaking his front-right suspension. The damage inflicted could not be repaired and he qualified sixteenth. Despite this horrendous qualifying performance, Räikkönen raced through the field to finish 8th gaining himself one championship point, the exact margin he ended up winning the Championship by."
-monaco_2007.change_text = "Räikkönen does not quite race back to 8th from 16th, instead scores 0pts in 9th."
+monaco_2007.change_text = "Räikkönen does not race back to 8th from 16th, instead finishes in 9th (0pts)."
 db.session.add(monaco_2007)
 
 canada_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'CAN').first()
 canada_2007.blurb = "Canada: An early crash on lap 22 led to a pit-stop-brigade, but Felipe Massa accidentally left the pit lane while the red exit light was on, disqualifying him from the race. Although it's unclear where he would have finished, it's likely he could have picked up around 8 points if he had not been disqualified. Just a few laps from the finish line, Alonso was also overtaken by Takuma Sato around the final chicane scoring him only 2 points in 7th place instead of 3 points in 6th."
-canada_2007.change_text = "Massa is not DSQ'd and instead finishes 2nd with 8pts."
+canada_2007.change_text = "Massa is not DSQ'd and instead finishes 2nd (8pts)."
 db.session.add(canada_2007)
 
 france_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'FRA').first()
 france_2007.blurb = "France: In a race that favored the top teams (Massa, Hamilton, Räikkönen were the top three), Alonso was unable to complete a single lap in the final qualifying session (Q3) due to a gearbox issue. He only finished 7th with 2 points. Even a fourth place, which would have been easily achievable without his gearbox failure, would have scored him an additional 3 points and the title by the end of the year."
-france_2007.change_text = "No Q3 mishap for Alonso, instead finishes 4th with 5pts."
+france_2007.change_text = "No Q3 mishap for Alonso, instead finishes 4th (5pts)."
 db.session.add(france_2007)
 
 turkey_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'TUR').first()
 turkey_2007.blurb = "Turkey: Hamilton found himself in the middle of the race quickly chasing down Räikkönen in second, but a surprise puncture forced him to drop to 5th only scoring 4 points instead of the likely 8 points he would have scored after passing Räikkönen."
-turkey_2007.change_text = "Hamilton doesn't suffer a puncture and scores 8pts in 2nd."
+turkey_2007.change_text = "Hamilton doesn't suffer a puncture and finishes 2nd (8pts)."
 db.session.add(turkey_2007)
 
 italy_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'ITA').first()
 italy_2007.blurb = "Italy: Massa who has started well in 3rd, retired from the race after a suspension failure. This left Massa fourth in the title fight and behind the leader by 23 points, a margin he would never make up."
-italy_2007.change_text = "Massa avoids suspension issues and finishes 3rd with 6pts."
+italy_2007.change_text = "Massa avoids suspension issues and finishes 3rd (6pts)."
 db.session.add(italy_2007)
 
 japan_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'JPN').first()
 japan_2007.blurb = "Japan: Alonso, who had begun the race in 2nd, struggled under wet conditions and aquaplaned into the wall on lap 41, forcing him to retire from the race, leaving a likely 8 points on the table."
-japan_2007.change_text = "Alonso keeps the car planted in the rain finishing in 2 with 8pts."
+japan_2007.change_text = "Alonso keeps the car planted in the rain finishing in 2 (8pts)."
 db.session.add(japan_2007)
 
 china_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'CHN').first()
 china_2007.blurb = "China: Hamilton was now 12 points in the lead for the Drivers' Championship with only 2 races to complete. He was leading this race before struggling with tire ware in the wet conditions and needing to pit. On his way into the pit entry, however, Hamilton failed to surmount the sharp left-hander and beached his car in the gravel where he was unable to get his car going and suffered the first retirement of his F1 career, ultimately costing him the Drivers' Championship in his rookie season."
-china_2007.change_text = "Hamilton wins the race (10pts) instead of beaching the car on pit entry."
+china_2007.change_text = "Hamilton wins the race instead of beaching the car on pit entry (10pts)."
 db.session.add(china_2007)
 
 brazil_2007 = Race.query.filter(Race.season_year == 2007, Race.abbreviation == 'BRA').first()
@@ -197,17 +197,17 @@ db.session.add(austrailia_2010)
 
 malaysia_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'MAL').first()
 malaysia_2010.blurb = "Malaysia: After a wet qualifying shifted some of the title contenders down in the grid order, the Malaysian Grand Prix was a fairly calm affair until the penultimate lap of the race, when Alonso attempted a move for 8th place but ran wide and surprisingly caused his engine to blow up, retiring him from the race leaving him with 0 points instead of a possible 4."
-malaysia_2010.change_text = "Alonso makes the move for 8th stick, earning 4pts."
+malaysia_2010.change_text = "Alonso makes the move for 8th stick (4pts)."
 db.session.add(malaysia_2010)
 
 spain_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'ESP').first()
 spain_2010.blurb = "Spain: Racing strong in 2nd on the penultimate lap of the race, Hamilton suffered a puncture and subsequent blowout punting him into the wall. He classified 14th with 0 points leaving what should have been a podium finish and 18 points on the table."
-spain_2010.change_text = "No blowout for Hamilton rather a podium finish with 18pts."
+spain_2010.change_text = "No blowout for Hamilton rather a podium finish (18pts)."
 db.session.add(spain_2010)
 
 turkey_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'TUR').first()
 turkey_2010.blurb = "Turkey: The Red Bull pair of Webber and Vettel were leading the race 1-2 before the pair collided on lap 40 forcing Vettel to retire and Webber to drop to 3rd by the end of the race. This accident promoted Hamilton to a race win, with Button in 2nd."
-turkey_2010.change_text = "Webber and Vettel do not collide leading home a Red Bull 1-2."
+turkey_2010.change_text = "Webber and Vettel do not collide leading home a Red Bull 1-2 (25pts, 18pts)."
 db.session.add(turkey_2010)
 
 canada_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'CAN').first()
@@ -221,7 +221,7 @@ db.session.add(europe_2010)
 
 germany_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'GER').first()
 germany_2010.blurb = "Germany: As the race was nearing its final stages, Ferrari issued team-orders to drivers Massa and Alonso to let Alonso pass Massa for the lead. This extremely controversial move led to an investigation that served Ferrari with a $100,000 fine. But many paddock members and commentators thought both Alonso and Massa should have been stripped of their points as well, leaving them both with 0 points instead of 25 and 18."
-germany_2010.change_text = "Alonso and Massa are stripped of their points due to sporting violations."
+germany_2010.change_text = "Alonso and Massa are stripped of their points due to sporting violations (0pts each)."
 db.session.add(germany_2010)
 
 hungary_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'HUN').first()
@@ -231,17 +231,17 @@ db.session.add(hungary_2010)
 
 italy_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'ITA').first()
 italy_2010.blurb = "Italy: After winning in Belgium, Hamilton once again reclaimed the lead of the championship. But at Monza, Hamilton and Massa came together on the first lap around Curva Grande and into the turn 4 chicane forcing the current leader of the title fight to retire leaving 10 or more points up for grabs."
-italy_2010.change_text = "Hamilton and Massa do not tangle and Hamilton picks up 10pts in 5th."
+italy_2010.change_text = "Hamilton and Massa do not tangle and Hamilton picks up 5th (10pts)."
 db.session.add(italy_2010)
 
 singapore_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'SIN').first()
 singapore_2010.blurb = "Singapore: In the middle portion of the race, Hamilton was gaining on Webber and lined up an overtaking maneuver on the Raffles Boulevard straight. However, when the two entered the subsequent corner, Webber's front tire punctured Hamilton's rear tire forcing Hamilton's third retirement in four races and leaving another 15 points on the table."
-singapore_2010.change_text = "Webber does not puncture Hamilton's wheel, scoring Hamilton 15pts."
+singapore_2010.change_text = "Webber does not puncture Hamilton's wheel, scoring Hamilton 3rd (15pts)."
 db.session.add(singapore_2010)
 
 korea_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'KOR').first()
 korea_2010.blurb = "Korea: An extremely wet race with poor visibility saw Vettel leading for the majority of the Grand Prix. But on lap 46, a surprise engine failure forced Vettel to retire from the lead losing a possible 25 points. This meant that after the race, Alonso led the Drivers' Championship with 246 points. Red Bull's Webber and Vettel were 2nd and 3rd with 238 and 231 points respectively. Hamilton was not in 4th but was mathematically still in title contention, trailing Alonso by 24 points."
-korea_2010.change_text = "Vettel wins from pole, avoiding retirement from engine trouble."
+korea_2010.change_text = "Vettel wins from pole, avoiding retirement from engine trouble (25pts)."
 db.session.add(korea_2010)
 
 abu_dhabi_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'ABU').first()
