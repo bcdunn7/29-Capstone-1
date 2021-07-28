@@ -42,6 +42,7 @@ function nextData(raceNo, separateData, raceLabels, chart) {
         chartData.datasets[i].data.push(separateData[i][raceNo])
     }
     chart.update();
+    populateTable(simulatorChart);
 }
 
 
@@ -70,6 +71,7 @@ $('#replay-season-btn').on('click', function() {
     $('#back-btn-form').removeClass('d-none');
     $('#overview').addClass('d-none');
     $('#chart-div').removeClass('d-none');
+    $('#table-container').removeClass('d-none');
 
     // remove data from chart
     let initialDataset = getInitialDataset(manipDatasets);
@@ -126,7 +128,7 @@ $('#restart-replay-btn').on('click', function() {
 // **********************************************
 // Sandbox Logic
 
-// On 'sandbox' create manipulatable toggles
+// On 'open simulator' create manipulatable toggles
 $('#sandbox-btn').on('click', function() {
 
     initializeChart();
@@ -134,9 +136,11 @@ $('#sandbox-btn').on('click', function() {
     $('#back-btn-form').removeClass('d-none');
     $('#overview').addClass('d-none');
     $('#chart-div').removeClass('d-none');
+    $('#table-container').removeClass('d-none');
 
+    // create toggles
     for (raceId of Object.keys(changeTexts)) {
-        $('#sandbox-toggles-div').append(`<div class='form-check form-switch m-1'><input id=${raceId} data-round='${changeTexts[raceId]['round']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${raceId}'>${changeTexts[raceId]['abbr']}: ${changeTexts[raceId]['change_text']}</label></div>`)
+        $('#sandbox-toggles-div').append(`<div class='form-check form-switch m-1'><input id=${raceId} data-round='${changeTexts[raceId]['round']}' class='form-check-input' type='checkbox' id='flexSwitchCheckDefault'><label class='form-check-label' for='${raceId}'><b>${changeTexts[raceId]['abbr']}</b>: ${changeTexts[raceId]['change_text']}</label></div>`)
     }
 
     // toggle changes that the user has previously saved
@@ -150,7 +154,37 @@ $('#sandbox-btn').on('click', function() {
 
     $('#sandbox-toggles-div').removeClass('d-none');
     $('#save-btn-div').removeClass('d-none');
+
+    // standings table
+    populateTable(simulatorChart);
 })
+
+
+function populateTable(chart) {
+    // find data to first sort before appending to table
+    let chartDatasets = chart.data.datasets;
+
+    let tableData = [];
+
+    for (let i=0; i<chartDatasets.length; i++) {
+        tableData.push([chartDatasets[i].label, chartDatasets[i].data.slice(-1)[0]])
+    }
+
+    // sort tableData
+
+    tableData.sort(function(a,b) {
+        return (b[1]-a[1]);
+    })
+    console.log(tableData)
+
+    // append sorted data to table
+    let body = $('#table-body');
+    body.empty()
+
+    for (let i=0; i<tableData.length; i++) {
+        body.append(`<tr><th>${i}</th><td>${tableData[i][0]}</td><td>${tableData[i][1]}</td></tr>`)
+    }
+}
 
 
 // function to manipulate race data based on toggle
@@ -187,6 +221,7 @@ function manipulateRaceData(raceId, round, chart) {
         }
     }
     chart.update();
+    populateTable(simulatorChart);
 }
 
 // function to undo manipulation on 'uncheck'
@@ -226,6 +261,7 @@ function undoRaceDataManipulation(raceId, round, chart) {
         }
     }
     chart.update()
+    populateTable(simulatorChart);
 }
 
 // event listener for toggle changes
