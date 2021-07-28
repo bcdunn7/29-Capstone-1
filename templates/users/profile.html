@@ -8,12 +8,54 @@
 
             <div class="h3">User: {{ g.user.username }}</div>
         
-            <form action="/erase" method="POST">
-                <button class="btn btn-warning btn-lg">Erase All Data</button>
-            </form>
-            <form method="POST">
-                <button class="btn btn-danger btn-lg">Delete User</button>
-            </form>
+            <button id="erase-data-modal-trigger" class="btn btn-warning btn-lg">Erase All Data</button>
+            <button id="delete-user-modal-trigger" class="btn btn-danger btn-lg">Delete User</button>
+            
+        </div>
+
+        <!-- confirmation modals -->
+
+        <div id="erase-data-modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Are you sure?</h5>
+                      <button type="button" class="btn btn-lg close modal-dismiss">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to erase user data? This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="/erase" method="POST">
+                            <button class="btn btn-warning">Confirm Erase All Data</button>
+                        </form>
+                      <button type="button" class="btn btn-secondary modal-dismiss">Cancel</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div id="delete-user-modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Are you sure?</h5>
+                      <button type="button" class="btn btn-lg close modal-dismiss">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete user? This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form method="POST">
+                            <button class="btn btn-danger">Confirm Delete User</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary modal-dismiss">Cancel</button>
+                    </div>
+                  </div>
+            </div>
         </div>
 
     </div>
