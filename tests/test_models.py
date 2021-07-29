@@ -2,7 +2,7 @@
 
 import os
 from unittest import TestCase
-from models import User_Change, db, User, Season, Race, Driver, Finish, Selected_Driver, Change
+from models import db, User, Season, Race, Driver, Finish, Selected_Driver, Change, User_Change
 from sqlalchemy import exc
 
 os.environ['DATABASE_URL'] = "postgresql:///influence-test"
