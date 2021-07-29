@@ -8,7 +8,7 @@ from models import db, connect_db, User, Season, User_Change, Race
 
 from forms import UserForm
 
-from helpers import not_logged_in, get_data_for_simulator, get_blurbs_for_races, get_changes_data, get_user_changes
+from helpers import not_logged_in, logged_in, get_data_for_simulator, get_blurbs_for_races, get_changes_data, get_user_changes
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = (
@@ -78,6 +78,9 @@ def signup():
     
     On post, create new user and add to DB and redirect to home. """
 
+    if (logged_in()):
+        return redirect('/')
+
     form = UserForm()
 
     if form.validate_on_submit():
@@ -102,6 +105,9 @@ def signup():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     """Log in user."""
+
+    if (logged_in()):
+        return redirect('/')
 
     form = UserForm()
 

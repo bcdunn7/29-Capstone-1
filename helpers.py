@@ -14,6 +14,12 @@ def not_logged_in():
         return True
 
 
+def logged_in():
+    if g.user:
+        flash("Already logged in; logout first!", "warning")
+        return True
+
+
 def get_data_for_simulator(year):
     """Gathers data from postgres and manipulates it into a race labels array and a dataset array for the chart."""
 
