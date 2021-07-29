@@ -1,5 +1,4 @@
 from flask_wtf import FlaskForm
-from flask_wtf.csrf import _FlaskFormCSRF
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length
 

@@ -1,6 +1,6 @@
 """Helper functions for app.py"""
 
-from flask import g, redirect, flash
+from flask import g, flash
 
 from models import Season, Race, Finish, Change, User_Change
 
