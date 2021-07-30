@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfluenceF1</title>
-    <!-- Uncomment for Jasmine Testing -->
+
+    <!-- Jasmine -->
     <link rel="stylesheet" href="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine.css" />
-    <!-- End of Jasmine Testing -->
 
     <!-- Chart.JS Script (MIT Liscensed) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
@@ -86,19 +86,29 @@
     {% endblock %}
     {% block javascript%}
     {% endblock %}
-    <!-- Uncomment for Jasmine Testing -->
-    <script src="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine.js"></script>
-    <script src="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
-    <script src= "https://unpkg.com/jasmine-core/lib/jasmine-core/boot.js"></script>
-    
-    <script src="tests/simulator.tests.js"></script>
-    
-    <!-- End of Jamine Files -->
 
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+    <!-- uncoment the following to run Jasmine tests -->
+
+    <script 
+    src="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+    <script 
+    src="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+    <script 
+    src= "https://unpkg.com/jasmine-core/lib/jasmine-core/boot.js"></script>
+
+    <script src="/tests/simulator.test.js"></script> 
+
+
+    <!-- end of Jasmine tests -->
+ 
+    <!-- Static JS Files -->
     <script src="/static/sidebar.js"></script>
     <script src="/static/user.js"></script>
 </body>
