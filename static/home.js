@@ -1,21 +1,27 @@
 // fading nav-bar
+$(document).ready(function(){
+    let prevScroll = 0;
 
+    $(window).scroll(function(){
+        let currScroll = $(this).scrollTop();
+        
+        if (currScroll > prevScroll) {
+            if (!$('#headnav-div').attr('style')) {
+                    // down
+                fadeHeadNav()
+            }
+        }
+        else if (currScroll < prevScroll) {
+            // up
+            showHeadNav()
+        }
 
-window.addEventListener('scroll', function(){
-    if (!$('#headnav-div').attr('style')) {
-        if(window.scrollY < 35) {
-                    showHeadNav()
-                }
-                else if (window.scrollY > 36 && window.scrollY < 100) {
-                    fadeHeadNav()
-                }
-    }
+        prevScroll = currScroll;
+    })
 })
 
 
 function showHeadNav() {
-    // $('#headnav-div').attr('style', "opacity: 0")
-    // $('#headnav-div').removeClass('d-none');
     $('#headnav-div').fadeTo(1, 1, function(){
         $('#headnav-div').removeClass('d-none');
         this.setAttribute('style', "")
