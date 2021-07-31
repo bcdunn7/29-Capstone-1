@@ -171,6 +171,7 @@ $('#sandbox-btn').on('click', function() {
     for (i in userChanges) {
         let toggle = document.getElementById(`${userChanges[i]}`)
         toggle.checked = true;
+        toggle.parentElement.classList.add('toggle-on');
         let raceId = parseInt(toggle.id);
         let round = parseInt(toggle.dataset.round);
         manipulateRaceData(raceId, round, simulatorChart)
@@ -205,7 +206,13 @@ function populateTable(chart) {
     body.empty()
 
     for (let i=0; i<tableData.length; i++) {
-        body.append(`<tr><th>${i}</th><td><div class="color-div" style="background-color:${tableData[i][2]}"></div>${tableData[i][0]}</td><td>${tableData[i][1]}</td></tr>`)
+        if (i === 0) {
+            body.append(`<tr><th><i class="fas fa-medal"></i></th><td><i class="fas fa-user-circle" style="color:${tableData[i][2]}"></i> ${tableData[i][0]}</td><td>${tableData[i][1]}</td></tr>`)
+        }
+        else {
+            body.append(`<tr><th>${i+1}</i></th><td><i class="fas fa-user-circle" style="color:${tableData[i][2]}"></i> ${tableData[i][0]}</td><td>${tableData[i][1]}</td></tr>`)
+        }
+
     }
 
     body.addClass('tbody-style');
@@ -294,10 +301,12 @@ $('#sandbox-toggles-div').on('change', '.form-check-input', function() {
     let raceId = parseInt(this.id);
     let round = parseInt(this.dataset.round);
     if(this.checked) {
-        manipulateRaceData(raceId, round, simulatorChart)
+        manipulateRaceData(raceId, round, simulatorChart);
+        this.parentElement.classList.add('toggle-on');
     }
     if(!this.checked) {
-        undoRaceDataManipulation(raceId, round, simulatorChart)
+        undoRaceDataManipulation(raceId, round, simulatorChart);
+        this.parentElement.classList.remove('toggle-on');
     }
 })
 
@@ -329,7 +338,6 @@ async function postUserChanges(raceIds, year) {
 
 
 function changesSaved(){
-    console.log('test')
     $('#changes-saved').removeClass('d-none');
     $('#changes-saved').delay(1250).fadeTo(500, 0, function(){
         this.classList.add('d-none');

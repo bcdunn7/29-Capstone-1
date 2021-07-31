@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="simulator-content-block" class="container content-block mb-5">
-    <div class="row justify-content-center align-items-center">
+    <div class="row justify-content-center">
 
         <!-- left col -->
         <div class="col-2">
-            <form id="back-btn-form" class="d-none">
-                <button id="sim-back-btn" class="btn btn-warning btn-sm">Back</button>
-            </form>
+            <div id="sim-back-btn-div">
+                <form id="back-btn-form" class="d-none">
+                    <button id="sim-back-btn" class="btn text-white btn-sm"><i class="fas fa-chevron-left fa-2x"></i></button>
+                </form>
+            </div>
+            <div id="replay-btns-div" class="d-none m-2">
+                <button id="prev-race-btn" class="btn sim-btn btn-lg text-light"><i class="fas fa-arrow-left"></i></button>
+                <button id="next-race-btn" class="btn sim-btn btn-lg text-light"><i class="fas fa-arrow-right"></i></button>
+                <button id="restart-replay-btn" class="btn sim-btn restart-btn btn-lg text-light d-none"><i class="fas fa-undo-alt"></i></button>
+            </div>
         </div>
 
         <!-- center col: heading, chart, blurbs -->
@@ -16,7 +23,7 @@
             <div class="h6 m-3">{{season.headline}}</div>
             <div id="overview" class="m-5">
                 <p class="fs-5">{{season.overview}}</p>
-                <hr class="my-5">
+                <hr id="sim-hr" class="my-5 sim-hr">
                 <div class="row">
                     <div class="col-6">
                         <button id="replay-season-btn" class="btn bg-color-tertiary btn-lg col-12 mt-3" >Replay Season</button>
@@ -34,13 +41,8 @@
             <div id="sandbox-toggles-div" class="d-none mx-2 my-3">
             </div>
             <div id="save-btn-div" class="d-none m-2">
-                <button id="save-btn" class="btn btn-info col-12">Save</button>
+                <button id="save-btn" class="btn bg-color-tertiary col-12">Save</button>
                 <small><i>This will save the current toggle arrangement to your account</i></small>
-            </div>
-            <div id="replay-btns-div" class="d-none m-2">
-                <button id="prev-race-btn" class="btn btn-info btn-lg text-light">Privious Race</button>
-                <button id="next-race-btn" class="btn btn-info btn-lg text-light">Next Race</button>
-                <button id="restart-replay-btn" class="btn btn-warning btn-lg text-light d-none">Restart</button>
             </div>
             <div id="blurb-div" class="d-none m-3">
                 <p id="blurb-p"></p>
@@ -49,19 +51,22 @@
 
         <!-- right col -->
         <div class="col-2">
-            <div id="table-container" class="container d-none">
-                <table id="standings-table" class="table sortable">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Driver</th>
-                            <th>Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                    </tbody>
-                </table>
+            <div id="table-container-div" class="row align-items-center">
+                <div id="table-container" class="container sub-content-block d-none">
+                    <table id="standings-table" class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Driver</th>
+                                <th>Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            
             
         </div>
     </div>

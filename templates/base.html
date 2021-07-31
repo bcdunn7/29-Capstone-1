@@ -81,16 +81,16 @@
                         <button id="sidebar-toggle-open" class="btn btn-sm m-1 bg-color-primary text-white"><i class="fas fa-bars"></i></button>
                     </div>
                 </nav>
-                <div id="flash-div" class="container">
-                    {% for category, message in get_flashed_messages(with_categories=True) %}
-                    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
-                    {% endfor %}
-                </div>
-                <div id="changes-saved" class="container d-none">
-                    <div class="alert alert-success" role="alert">Changes Saved!</div>
-                </div>
             </div>
         </div>
+    </div>
+    <div id="flash-div" class="container">
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    <div id="changes-saved" class="container d-none">
+        <div class="alert alert-success" role="alert">Changes Saved!</div>
     </div>
     <div id="body-content-div">
         {% block content %}

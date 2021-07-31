@@ -1,21 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-<div class="h2">Log in</div>
-    <form method="post">
-        {{ form.hidden_tag() }}
-        
-        {% for field in form if field.widget.input_type != 'hidden' %}
-        <div class="form-group">
-            {{ field.label }}
-            {{field(class="form-control") }}
-            {% for error in field.errors %}
-            <small class="form-text text-danger">{{ error }}</small>
-            {% endfor %}
+<div class="container user-form">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="h2 my-4">Log in</div>
+            <form method="post">
+                {{ form.hidden_tag() }}
+                
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                <div class="form-group">
+                    {{ field.label }}
+                    {{field(class="form-control input-shadow") }}
+                    {% for error in field.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <button class="btn bg-color-primary text-white col-12 my-3">Submit</button>
+            </form>
+            <p>Don't have an account? Sign up <a class="text-color-primary" href="/signup">here!</a></p>
         </div>
-        {% endfor %}
-        <button class="btn btn-info col-12">Submit</button>
-    </form>
-    <p>Don't have an account? Sign up <a href="/signup">here!</a></p>
+    </div>
 </div>
 {% endblock %}
