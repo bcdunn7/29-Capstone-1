@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="/static/nav.css">
     <link rel="stylesheet" href="/static/alert.css">
     <link rel="stylesheet" href="/static/main.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5353f1ca08.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Nav side bar -->
@@ -24,32 +30,36 @@
             <div id="sidebar" class="row">
                 <div class="col-12">
                     <div id="nav-exit-row" class="row">
-                        <div class="my-2">
-                            <button id="sidebar-toggle-close" class="btn btn-sm btn-primary">Close</button>
+                        <div class="my-3 mx-2">
+                            <button id="sidebar-toggle-close" class="btn btn-sm bg-color-primary text-white"><i class="fas fa-chevron-right"></i></button>
                         </div>
                     </div>
                     <div id="nav-content-row" class="row">
                         <nav class="nav  text-center flex-column">
-                            <div class="h5">InfluenceF1</div>
-    
-                            <a href="/" class="nav-link">HOME</a>
-                            <a href="/how-it-works" class="nav-link">HOW IT WORKS</a>
-                            <a href="/simulator/2007" class="nav-link">2007</a>
-                            <a href="/simulator/2010" class="nav-link">2010</a>
+                            <div class="h3 text-color-primary"><b>InfluenceF1</b></div>
+                            <hr>
+                            <a href="/" class="nav-link text-color-primary">HOME</a>
+                            <a href="/how-it-works" class="nav-link text-color-primary">HOW IT WORKS</a>
+                            {% if g.user %}
+                            <div class="nav-link text-color-primary mt-5"><b>Simulator Seasons:</b></div>
+                            <hr>
+                            <a href="/simulator/2007" class="nav-link text-color-primary">2007</a>
+                            <a href="/simulator/2010" class="nav-link text-color-primary">2010</a>
+                            {% endif %}
                         </nav>
                     </div>
                     <div id="nav-user-row" class="row justify-content-center">
                         <ul class="nav justify-content-center">
                             {% if g.user %}
                             <form action="/logout" method="POST">
-                                <button type="submit" class="btn bg-transparent nav-link">
+                                <button type="submit" class="bg-transparent nav-link text-color-primary">
                                     Logout
                                 </button>
                             </form>
-                            <a href="/profile" class="nav-link">Profile</a>
+                            <a href="/profile" class="nav-link text-color-primary">Profile</a>
                             {% else %}
-                            <a href="/login" class="nav-link">Login</a>
-                            <a href="/signup" class="nav-link">Signup</a>
+                            <a href="/login" class="nav-link text-color-primary">Login</a>
+                            <a href="/signup" class="nav-link text-color-primary">Signup</a>
                             {% endif %}
                         </ul>
                         <small>Currently signed in: {{g.user.username}}</small>
@@ -60,15 +70,15 @@
     </div>
     <!-- page heading and content -->
     <div id="overlay"></div>
-    <div class="container-fluid">
+    <div id="headnav-div" class="container-fluid mx-2">
         <div class="row justify-content-center m-3">
             <div class="col">
                 <nav id="headnav">
-                    <div class="navbar-brand">
-                        <a href="/" class="h4 text-decoration-none">InfluenceF1</a>
+                    <div class="navbar-brand text-color-primary">
+                        <a href="/" class="h4 text-decoration-none text-color-primary">InfluenceF1</a>
                     </div>
                     <div class="nav-right">
-                        <button id="sidebar-toggle-open" class="btn btn-sm btn-primary m-1">Menu</button>
+                        <button id="sidebar-toggle-open" class="btn btn-sm m-1 bg-color-primary text-white"><i class="fas fa-bars"></i></button>
                     </div>
                 </nav>
                 <div id="flash-div" class="container">
@@ -82,10 +92,10 @@
             </div>
         </div>
     </div>
-    {% block content %}
-    {% endblock %}
-    {% block javascript%}
-    {% endblock %}
+    <div id="body-content-div">
+        {% block content %}
+        {% endblock %}
+    </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -96,14 +106,14 @@
 
     <!-- uncoment the following to run Jasmine tests -->
 
-    <script 
+    <!-- <script 
     src="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine.js"></script>
     <script 
     src="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
     <script 
     src= "https://unpkg.com/jasmine-core/lib/jasmine-core/boot.js"></script>
 
-    <script src="/tests/simulator.test.js"></script> 
+    <script src="/tests/simulator.test.js"></script>  -->
 
 
     <!-- end of Jasmine tests -->
@@ -111,5 +121,10 @@
     <!-- Static JS Files -->
     <script src="/static/sidebar.js"></script>
     <script src="/static/user.js"></script>
+    <script src="/static/tutorial.js"></script>
+    <script src="/static/home.js"></script>
+    
+    {% block javascript%}
+    {% endblock %}
 </body>
 </html>

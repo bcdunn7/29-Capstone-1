@@ -1,4 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>How it works:</h2>
+<div id="tutorial-content-block" class="container content-block">
+    <div class="row jutify-content-center text-center">
+        <div class="col-6">
+            <div class="row justify-content-center align-items-center">
+                <div class="container align-items-center">
+                    <div class="row">
+                        <div class="display-3 px-3 py-5 text-white">
+                            <b>How it Works:</b>
+                        </div>
+                        <div id="two-modes-div">
+                            <p class="lead mt-3">The simulator page has two modes: <br> <b>Replay Mode</b> and <b>Simulator</b>.
+                            </p>
+                        </div>
+                    </div>
+                    <div id="mode-description-div" class="row mx-3 my-5">
+                        <div class="col-6">
+                            <p class="p-2">Moves through each race of the season allowing you to follow the dramatic, championship winning (or losing) moments of each season.</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="p-2">A sandbox manipulation mode where you can change the dramatic events of each season that were explored in <b>Replay Season</b> mode.</p>
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-6">
+                            <button id="tutorial-replay-mode-btn" class="btn btn-info text-white btn-lg col-10">Replay Mode</button>
+                            <br>
+                        </div>
+                        <div class="col-6">
+                            <button id="tutorial-simulator-btn" class="btn btn-info text-white btn-lg col-10">Simulator</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <small>Learn how each mode works by clicking the buttons above.</small> 
+                    </div>
+                    <div class="row m-5">
+                        <div id="tutorial-back-btn" class="col-1 explanation-btn-div align-items-center d-none">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div id="tutorial-replay-mode-explanation" class="col-11 explanation-div text-center d-none">
+                            In <b>Replay Mode</b> the simulator moves through each race one at a time, highlighting the defining moments of that season. Start here and then move to the <b>Simulator</b> to explore more.
+                        </div>
+                        <div id="tutorial-simulator-explanation" class="col-11 explanation-div text-center d-none">
+                            In the <b>Simulator</b> the entire season's results are shown along with a series of toggles that allow you to choose whether the dramatic and defining moments of that season count. Use these toggles to explore different possible outcomes for the season.
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div> 
+        <div class="col-6">
+            <div id="image-col-container"  class="row align-items-center justify-content-center">
+                <div id="home-image-container" class="container m-3">
+                    <img src="../static/images/home_page_demo.jpg" alt="demo image" style="max-width: 500px; height: auto;">
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

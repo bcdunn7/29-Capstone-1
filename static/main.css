@@ -1,5 +1,153 @@
 /* ********************************************** */
+/* General */
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: rgba(245,246,250,255);
+    color: white;
+}
+
+#body-content-div {
+    margin-top: 100px;
+}
+
+.content-block {
+    border-radius: 25px;
+    background-color: white;
+    height: 80vh;
+    width: 90vw;
+    overflow: auto;
+}
+
+.sub-content-block {
+    padding: 14px;
+    border-radius: 15px;
+    background-color: rgba(245,246,250,255);
+    overflow: auto;
+}
+
+.main-content-block {
+    background-color: rgba(163,95,216,255);
+    margin-top: 33px;
+    height: 80vh;
+    width: 90vw;
+    overflow: auto;
+}
+
+#tutorial-content-block {
+    background-color: #675FD8;
+    margin-top: 33px;
+    height: 80vh;
+    min-width: 90vw;
+    overflow: auto;
+}
+
+.btn-content-block {
+    height: 38%;
+    background-image: linear-gradient(to right, rgba(245,246,250,255), rgb(219, 207, 230));
+    transition: all 0.3s ease;
+}
+
+.btn-content-block:hover {
+    transform: scale(110%);
+    cursor: pointer;
+}
+
+.btn-block-row {
+    height: 80vh;
+}
+
+.btn-scale {
+    transition: all 0.2s ease;
+    border-radius: 25px;
+    height: 7em;
+    width: 10em;
+}
+
+.btn-scale:hover {
+    transform: scale(110%);
+}
+
+.explanation-div {
+    padding-top: 9vh;
+    padding-bottom: 9vh;
+    text-align: center;
+}
+
+.explanation-btn-div {
+    padding-top: 11vh;
+    padding-bottom: 11vh;
+    text-align: center;
+}
+
+.explanation-btn-div:hover {
+    cursor: pointer;
+}
+
+.text-color-primary {
+    color: rgba(163,95,216,255);
+}
+
+.text-color-primary:hover {
+    color: rgba(163,95,216,255);
+}
+
+.bg-color-primary {
+    background-color: rgba(163,95,216,255);
+}
+
+.bg-color-secondary {
+    background-color: #f2f3f3;
+}
+
+.bg-color-secondary:hover {
+    background-color: #e7cdee;
+}
+
+.bg-color-tertiary {
+    background-color: #ebce92;
+}
+
+.lead {
+    font-weight: 400;
+}
+
+/* ********************************************** */
+/* Home Page */
+
+#headnav-div {
+    background-color: white;
+    top: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 0.5px;
+    border-radius: 25px;
+    position: fixed;
+    transition: all 0.3;
+}
+
+#home-image-container {
+    width: fit-content;
+    height: fit-content;
+    box-shadow: 0px 0px 8px 6px rgba(245,246,250,255);
+    box-shadow: 0px 0px 8px 6px rgba(245,246,250,255);
+    box-shadow: 0px 0px 8px 6px rgba(245,246,250,255);
+    box-shadow: 0px 0px 8px 6px rgba(245,246,250,255);
+    background-color: rgba(245,246,250,255);
+}
+
+#image-col-container {
+    height: 75vh;
+}
+
+/* ********************************************** */
 /* Simulator Page */
+
+#simulator-content-block {
+    background-color: rgb(138, 201, 209);
+    height: fit-content;
+    min-height: 90vh;
+}
 
 /* table */
 

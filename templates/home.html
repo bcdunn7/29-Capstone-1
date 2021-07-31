@@ -1,6 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div>Graph</div>
-    <div>Intro text</div>
-    <div>button to Get Started</div>
+<div class="container content-block main-content-block">
+    <div class="row jutify-content-center text-center">
+        <div class="col-6">
+            <div class="display-3 px-3 py-5 text-white">
+                <b>InfluenceF1</b>
+            </div>
+            <p class="lead m-5">An interactive simulator to relive past Formula 1 seasons. Explore some of the closest and best seasons of Formula 1 featuring many of the sport's greatest drivers and most dramatic moments in F1 history. 
+            </p>
+            <div class="pt-3">
+                <div class="row m-2">
+                    <div class="col-6">
+                        <button class="btn btn-lg col-10 bg-color-secondary mt-5 ms-4 text-color-primary btn-scale"><div class="display-6"><a href="/login" class="text-decoration-none text-color-primary">Login</a></div></button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-lg col-10 bg-color-secondary mt-5 me-4 text-color-primary btn-scale"><div class="display-6"><a href="/signup" class="text-decoration-none text-color-primary">Signup</a></div></button>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <div class="col-6">
+            <div class="row btn-block-row align-items-center mx-4">
+                <div id="tutorial-block-btn" class="content-block btn-content-block text-color-primary mt-4" data-location="/how-it-works">
+                    <p class="lead mt-5">Want to see how it works?</p>
+                    <div class="display-4 pt-3">Open Tutorial</div>
+                </div>
+                <div id="simulator-block-btn" class="content-block btn-content-block text-color-primary mb-4" data-location="/simulator">
+                    <p class="lead mt-5">Ready to Start?</p>
+                    <div class="display-4 pt-3">Open Simulator</div>                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
