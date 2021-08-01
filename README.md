@@ -5,7 +5,7 @@
 Deployed here:  
 <p>&nbsp;</p>
 
-### **Features:**
+## **Features:**
  * The site displays results and standings data from the Ergast API for seasons which had extremely close standings, especially those where a dramatic or controversial event determined the result of the chamionship
  #### The site has two main 'modes'
  - A '**Replay Mode**' where users can navigate through a given season race by race to see where the crucial points were scored. Certain races also have information on dramatic or controversial moments that occured in a race.
