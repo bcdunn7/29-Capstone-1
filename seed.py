@@ -123,7 +123,7 @@ make_API_call_and_generate_data(2007, ['RAI', 'HAM', "ALO", "MAS"])
 
 make_API_call_and_generate_data(2010, ['VET', 'ALO', 'WEB', 'HAM', 'BUT', 'MAS'])
 
-make_API_call_and_generate_data(2008, ['HAM', 'MAS' 'KUB', 'RAI'])
+make_API_call_and_generate_data(2008, ['HAM', 'MAS'])
 
 # This function currently uses driver codes for disambiguation, but the API does not support codes for all (namely, older than 2005) seasons. A modified function would need to be created for those
 
@@ -255,7 +255,7 @@ db.session.add(abu_dhabi_2010)
 # 2008
 
 s2008 = Season.query.get(2008)
-s2008.overview = "THe 2008 Formula 1 season is one of F1 great, Lewis Hamilton's best seasons. The season was filled with great racing, close battle, and its fair share of controversial moments. Lewis won the title by 1 point, securing that point on the final corner of the final lap at the final race of the season in arguably the most dramatic finish to a Formula 1 season ever. The battle for bronze was no different, Räikkönen won due to race wins after he and Robert Kubica finished the season tied on 75 points. This season set several F1 records as well. In winning the title, Lewis became the youngest driver to win the world Championship (though this was surpassed only two years later by Sebastian Vettel). Hamilton also became the first black driver to win the title in a sport that has been plagued with issues of diversity and inclusion. Hamilton was also the first British champion since Damon Hill in 1996, an unusual pause for a sport often dominated by the British."
+s2008.overview = "The 2008 Formula 1 season is one of F1 great, Lewis Hamilton's best seasons. The season was filled with great racing, close battle, and its fair share of controversial moments. Lewis won the title by 1 point, securing that point on the final corner of the final lap at the final race of the season in arguably the most dramatic finish to a Formula 1 season ever. The battle for bronze was no different, Räikkönen won due to race wins after he and Robert Kubica finished the season tied on 75 points. This season set several F1 records as well. In winning the title, Lewis became the youngest driver to win the world Championship (though this was surpassed only two years later by Sebastian Vettel). Hamilton also became the first black driver to win the title in a sport that has been plagued with issues of diversity and inclusion. Hamilton was also the first British champion since Damon Hill in 1996, an unusual pause for a sport often dominated by the British."
 s2008.headline = "Hamilton 98 — Massa 97"
 db.session.add(s2008)
 

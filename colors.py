@@ -12,5 +12,9 @@ line_colors = {
         'VET': '#3D4AF3',
         'BUT': '#92F33D',
         'WEB': '#A13DF3'
+    },
+    2008: {
+        'HAM': '#33FFE8',
+        'MAS': '#F3A13D',
     }
 }
