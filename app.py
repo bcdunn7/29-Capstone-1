@@ -10,8 +10,13 @@ from forms import UserForm
 from helpers import not_logged_in, logged_in, get_data_for_simulator, get_blurbs_for_races, get_changes_data, get_user_changes
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgresql:///influenceF1'))
+
+# heroku-postgres issue workaround:
+uri = os.environ.get('DATABASE_URL', 'postgresql:///influenceF1')
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
