@@ -16,7 +16,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
 connect_db(app)
-db.create_all()
+# db.create_all()
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'b/xc3/x8a/xdc/x84/x98/x05/xfc/xaa/xb5/xde/xa9')
 
