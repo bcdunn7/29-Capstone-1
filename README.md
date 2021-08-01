@@ -2,7 +2,7 @@
 
 #### **A simple Flask application to observe and manipulate results of key Formula 1 seasons.**
 <p>&nbsp;</p>
-Deployed here:  
+Deployed here: https://influencef1-app.herokuapp.com/
 <p>&nbsp;</p>
 
 ## **Features:**
