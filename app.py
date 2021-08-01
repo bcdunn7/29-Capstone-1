@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask, render_template, session, g, json, flash, redirect, request
-from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
 from models import db, connect_db, User, Season, User_Change, Race
@@ -19,10 +18,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 connect_db(app)
 db.create_all()
 
-app.config['SECRET_KEY'] = "secret"
-
-debug = DebugToolbarExtension(app)
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'secret')
 
 CURR_USER_KEY = "current_user"
 
