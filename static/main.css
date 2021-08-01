@@ -57,6 +57,7 @@ body {
     height: 80vh;
 }
 
+
 .btn-scale {
     transition: all 0.2s ease;
     border-radius: 25px;
@@ -108,6 +109,10 @@ body {
     background-color: #ebce92;
 }
 
+.bg-color-quaternary {
+    background-color: rgb(99, 196, 209);
+}
+
 .lead {
     font-weight: 400;
 }
@@ -145,16 +150,18 @@ body {
     position: fixed;
     transition: all 0.3;
     box-shadow: 0px 0px 5px 1px rgb(197, 197, 197);
+    z-index: 2;
 }
 
 #home-image-container {
     width: fit-content;
     height: fit-content;
-    box-shadow: 0px 0px 8px 6px rgba(245,246,250,255);
-    box-shadow: 0px 0px 8px 6px rgba(245,246,250,255);
-    box-shadow: 0px 0px 8px 6px rgba(245,246,250,255);
-    box-shadow: 0px 0px 8px 6px rgba(245,246,250,255);
-    background-color: rgba(245,246,250,255);
+    box-shadow: 0px -2px 4px 8px rgb(138, 201, 209);
+    box-shadow: 0px 2px 4px 8px rgb(138, 201, 209);
+    box-shadow: 2px 0px 4px 8px rgb(138, 201, 209);
+    box-shadow: -2px 0px 4px 8px rgb(138, 201, 209);
+    background-color: #675FD8;
+    padding: 0;
 }
 
 #image-col-container {
@@ -171,9 +178,13 @@ body {
 }
 
 #sim-hr {
-    color: #35517e;
-    box-shadow: 0 0 3px 1px #35517e;
+    color: #dde3ec;
+    box-shadow: 0 0 2px 0.5px #dbdfe6;
     width: 90%;
+}
+
+.sim-page-btn {
+    text-shadow: 0.3px 0.3px 3px rgb(60, 74, 100);
 }
 
 #blurb-div {
