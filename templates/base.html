@@ -62,7 +62,6 @@
                             <a href="/signup" class="nav-link text-color-primary">Signup</a>
                             {% endif %}
                         </ul>
-                        <small>Currently signed in: {{g.user.username}}</small>
                     </div>
                 </div>
             </div>
@@ -78,6 +77,9 @@
                         <a href="/" class="h4 text-decoration-none text-color-primary">InfluenceF1</a>
                     </div>
                     <div class="nav-right">
+                        {% if g.user %}
+                            <p id="user-welcome" class="lead d-inline pe-5 mt-2 text-color-primary">Hi, {{g.user.username}}!</p>
+                        {% endif %}
                         <button id="sidebar-toggle-open" class="btn btn-sm m-1 bg-color-primary text-white"><i class="fas fa-bars"></i></button>
                     </div>
                 </nav>

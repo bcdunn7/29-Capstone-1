@@ -26,6 +26,11 @@
     transform: scale(1.15);
 }
 
+#user-welcome {
+    position: relative;
+    top: 15%;
+}
+
 /* ********************************************** */
 /* SIDEBAR */
 

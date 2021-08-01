@@ -106,7 +106,12 @@ body {
 }
 
 .bg-color-tertiary {
-    background-color: #ebce92;
+    background-color: #51C58B;
+    box-shadow: 0 0 2px 0.5px rgb(39, 163, 81);
+    transition: all 0.3s ease;
+}
+.bg-color-tertiary:hover {
+    transform: scale(105%);
 }
 
 .bg-color-quaternary {
