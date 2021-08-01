@@ -123,7 +123,9 @@ make_API_call_and_generate_data(2007, ['RAI', 'HAM', "ALO", "MAS"])
 
 make_API_call_and_generate_data(2010, ['VET', 'ALO', 'WEB', 'HAM', 'BUT', 'MAS'])
 
-# This function currently uses driver codes for disambiguation, but the API does not support codes for all (namely, older) seasons. A modified function would need to be created for those
+make_API_call_and_generate_data(2008, ['HAM', 'MAS' 'KUB', 'RAI'])
+
+# This function currently uses driver codes for disambiguation, but the API does not support codes for all (namely, older than 2005) seasons. A modified function would need to be created for those
 
 #********************
 # Add non-API data
@@ -249,12 +251,65 @@ abu_dhabi_2010.blurb = "Abu Dhabi: Vettel led this race from pole followed by Ha
 db.session.add(abu_dhabi_2010)
 
 
-# s2007 changes
-# find s2007 drivers
-RAI = Driver.query.filter_by(code='RAI').first()
-HAM = Driver.query.filter_by(code='HAM').first()
-ALO = Driver.query.filter_by(code='ALO').first()
-MAS = Driver.query.filter_by(code='MAS').first()
+
+# 2008
+
+s2008 = Season.query.get(2008)
+s2008.overview = "Overview"
+s2008.headline = "Hamilton 98 — Massa 97"
+db.session.add(s2008)
+
+austrailia_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'AUS').first()
+austrailia_2008.blurb = "Australia: The first race of the season was an eventful one. Only 7 cars crossed the finish line, and 1 of those was later disqualified. Massa unfortunately collided with David Coulthard on lap 26 forcing him to retire from engine troubles just a few laps later. Hamilton won from pole."
+austrailia_2008.change_text = "Massa doesn't collide with Coulthard finishing in 4th (5pts)."
+db.session.add(austrailia_2008)
+
+malaysia_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'MAL').first()
+malaysia_2008.blurb = "Though racing well in the fight for podium, Massa spun off on lap 31 getting his car beached in the gravel. Hamilton managed to pick up 4 points in 5th."
+malaysia_2008.change_text = "Massa doesn't spin off and beach his car, finishes 5th (4pts)."
+db.session.add(malaysia_2008)
+
+bahrain_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'BHR').first()
+bahrain_2008.blurb = "Hamilton, who was leading the championship before this race, suffered a poor start, and then later collided with the Renault of Alonso leaving him with an abysmal performance, finishing in 13th."
+bahrain_2008.change_text = "Hamtilton has no grid troubles and races away fine in 3rd (6pts)."
+db.session.add(bahrain_2008)
+
+canada_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'CAN').first()
+canada_2008.blurb = "In one of the most dramatic moments of the 2008 season, Hamilton led Räikkönen and Kubica into the pit lane, leading the race. But Räikkönen led the other two out of the pit lane. However, as they approached the exit, Räikkönen had slowed and then quickly come to a stop as the pit lane had a red light at the time. However, Hamilton did not notice the red light and crashed into the back of Räikkönen forcing both drivers to retire."
+canada_2008.change_text = "Hamilton avoids dramatic pit lane crash in Canada (6pts)."
+db.session.add(canada_2008)
+
+france_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'FRA').first()
+france_2008.blurb = "Due to a collision with Räikkönen in Canada, Hamilton suffered a 10 place grid penalty, and he could only manage to finish 10th. Massa went on to win the race."
+france_2008.change_text = "Hamilton doesn't receive 10 place grid penalty, finishes 3rd (6pts)."
+db.session.add(france_2008)
+
+hungary_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'HUN').first()
+hungary_2008.blurb = "On lap 68 of 70 Massa appeared to be in command of the race, but an unexpected engine failure forced him to retire from the race with only 2 and a half laps left, leaving 10 points on the table."
+hungary_2008.change_text = "Massa hangs on for two more laps to win race (10pts)."
+db.session.add(hungary_2008)
+
+belguim_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'BEL').first()
+belguim_2008.blurb = "In a difficult and eventful race, Hamilton managed to bring home a win, crossing the line in first and even standing on the top step of the podium for the winner's ceremony. But in a highly unusual move, the FIA steward issued a 25 second penalty to Hamilton 2 hours after the race due to cutting a corner and gaining an advantage. This highly controversial decision divided the F1 paddock and led to months of legal court battles but with no different result."
+belguim_2008.change_text = "Hamilton gets no controversial penalty, wins race (10pts)."
+db.session.add(belguim_2008)
+
+italy_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'ITA').first()
+italy_2008.blurb = "A poor qualifying and race performance from both Hamilton and Massa left them out of the top 5, scoring just a handful of points. This race did, however, feature Sebastian Vettel becoming the youngest driver to win a Formula 1 race. Vettel would go on to claim the youngest driver to win the Drivers' Championship in 2010 as well."
+db.session.add(italy_2008)
+
+japan_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'JPN').first()
+japan_2008.blurb = "On lap 2, Massa locked-up going into turn 10 and hit Hamilton's car spinning him, forcing him to pit, and dropping Hamilton to 18th. Though Massa was handed a penalty for this, he still finished in 7th with 2 points, while Hamilton finished with no points in 12th. Heading into the final race of the season, then, Hamilton led Massa 94 points to 87 points, a sizable lead since the maximum points available for one race is 10. Even if Massa won, Hamilton would only need 5th place in Brazil to still win the championship."
+japan_2008.change_text = "Massa is punished more severely for contact with Hamilton (0pts)."
+db.session.add(japan_2008)
+
+brazil_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'BRA').first()
+brazil_2008.blurb = "The 2008 Brazilian Grand Prix remains perhaps the most dramatic final race of a Formula 1 season.  For the majority of the race Massa led with Hamilton only a few position behind (but enough to win the championship. However, rain began to fall on lap 63 (of 71) and all of the top drivers except Timo Glock pitted for intermediate-weather tires. As a result, Glock moved passed Hamilton into fourth place, demoting Hamilton to 5th (the lowest place where we would still win the championship). On lap 69 (two to the end), Vettel passed Hamilton demoting him to 6th, giving Massa the championship. As Massa passed the finish line, premature celebration erupted in the Ferrari garage and Vettel and then Hamilton passed the struggling Timo Glock around the very final corner of the race, a mere few hundred meters from the finish line, promoting Hamilton to 5th place winning him the championship by 1 point. Although 6th place would have resulted in a tie on points, Massa would have one the championship since he had more race wins."
+brazil_2008.change_text = "Hamilton can't fight back to 5th place, finishes 6th (3pts)."
+db.session.add(brazil_2008)
+# *************************************************************************************************
+# *************************************************************************************************
+
 
 # function for making changes connections
 def add_change(season, race, driver, new_pos, new_poi):
@@ -268,6 +323,13 @@ def add_change(season, race, driver, new_pos, new_poi):
     db.session.add(new_change)
     db.session.commit()
 
+
+# s2007 changes
+# find s2007 drivers
+RAI = Driver.query.filter_by(code='RAI').first()
+HAM = Driver.query.filter_by(code='HAM').first()
+ALO = Driver.query.filter_by(code='ALO').first()
+MAS = Driver.query.filter_by(code='MAS').first()
 
 # Monaco
 add_change(2007, monaco_2007, RAI, 9, 0)
@@ -370,6 +432,44 @@ add_change(2010, singapore_2010, MAS, 9, 2)
 add_change(2010, korea_2010, VET, 1, 25)
 add_change(2010, korea_2010, ALO, 2, 18)
 add_change(2010, korea_2010, HAM, 3, 15)
+
+
+
+# 2008
+# s2008 changes
+# find s2008 drivers
+HAM = Driver.query.filter_by(code='HAM').first()
+MAS = Driver.query.filter_by(code='MAS').first()
+
+# Austrailia
+add_change(2008, austrailia_2008, MAS, 4, 5)
+
+# Malaysia
+add_change(2008, malaysia_2008, HAM, 6, 3)
+add_change(2008, malaysia_2008, MAS, 5, 4)
+
+# Bahrain
+add_change(2008, bahrain_2008, HAM, 3, 6)
+
+# Canada
+add_change(2008, canada_2008, HAM, 3, 6)
+
+# Franch
+add_change(2008, france_2008, HAM, 3, 6)
+
+# hungary
+add_change(2008, hungary_2008, HAM, 6, 3)
+add_change(2008, hungary_2008, MAS, 1, 10)
+
+# belgium
+add_change(2008, belguim_2008, HAM, 1, 10)
+add_change(2008, belguim_2008, MAS, 2, 8)
+
+# Japan
+add_change(2008, japan_2008, MAS, 9, 0)
+
+# brazil
+add_change(2008, brazil_2008, HAM, 6, 3)
 
 
 # **********************
