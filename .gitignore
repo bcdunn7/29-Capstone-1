@@ -1,3 +1,5 @@
 trial/
 venv/
 __pycache__/
+Procfile
+runtime.txt
