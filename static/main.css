@@ -27,7 +27,7 @@ body {
 }
 
 .main-content-block {
-    background-color: rgba(163,95,216,255);
+    background-color: rgb(134, 58, 192);
     margin-top: 33px;
     height: 80vh;
     width: 90vw;
@@ -106,12 +106,14 @@ body {
 }
 
 .bg-color-tertiary {
-    background-color: #e9ade4;
-    box-shadow: 0 0 2px 0.5px rgb(198, 133, 200);
+    background-color: #3aa9ca;
+    box-shadow: 0 0 2px 0.5px #2a8fad;
     transition: all 0.3s ease;
 }
 .bg-color-tertiary:hover {
     transform: scale(105%);
+    background-color: #64b8d1;
+    box-shadow: 0 0 2px 0.5px #54abc5;
 }
 
 .bg-color-quaternary {

@@ -218,7 +218,7 @@ db.session.add(canada_2010)
 
 europe_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'EUR').first()
 europe_2010.blurb = "Europe: Webber, starting in second, suffered a serious of entanglements with other drivers ultimately culminating in an intense crash with Heikki Kovalainen, sending Webber's car airborne and careening into a tire barrier leaving him with a retirement instead of 18 points."
-europe_2010.change_text = "Webber avoids conflilcts with other drivers and retains his second place (18pts)."
+europe_2010.change_text = "Webber avoids conflicts with other drivers and retains his second place (18pts)."
 db.session.add(europe_2010)
 
 germany_2010 = Race.query.filter(Race.season_year == 2010, Race.abbreviation == 'GER').first()
@@ -271,7 +271,7 @@ db.session.add(malaysia_2008)
 
 bahrain_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'BHR').first()
 bahrain_2008.blurb = "Hamilton, who was leading the championship before this race, suffered a poor start, and then later collided with the Renault of Alonso leaving him with an abysmal performance, finishing in 13th."
-bahrain_2008.change_text = "Hamtilton has no grid troubles and races away fine in 3rd (6pts)."
+bahrain_2008.change_text = "Hamilton has no grid troubles and races away fine in 3rd (6pts)."
 db.session.add(bahrain_2008)
 
 canada_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == 'CAN').first()
