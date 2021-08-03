@@ -5,6 +5,48 @@
 Deployed here: https://influencef1-app.herokuapp.com/
 <p>&nbsp;</p>
 
+## **To Recreate:**
+Required Tech: Python, PostgreSQL
+* Download/Clone Git and navigate to file
+
+    ``` 
+    $ git clone https://github.com/bcdunn7/influenceF1
+    $ cd path-to-influenceF1
+    ```
+
+* Set up virtual environ and install dependencies 
+
+    ```
+    $ python3 -m venv venv
+    $ source venv/bin/activate
+    (venv) $ pip3 install -r requirements.txt
+    ```
+
+* Set up database
+
+    ```
+    $ sudo service postgresql start
+    ...
+    $ createdb influenceF1
+    ```
+
+* Seed database
+
+    ```
+    $ python seed.py
+    ```
+
+* Start server
+
+    ```
+    $ flask run
+    ```
+
+* navigate to server/localhost!
+
+
+<p>&nbsp;</p>
+
 ## **Features:**
  * The site displays results and standings data from the Ergast API for seasons which had extremely close standings, especially those where a dramatic or controversial event determined the result of the chamionship
  #### The site has two main 'modes'
