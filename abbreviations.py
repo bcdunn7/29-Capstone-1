@@ -76,6 +76,30 @@ race_abbrs = {
         'Japanese Grand Prix': 'JPN',
         'Chinese Grand Prix': 'CHN',
         'Brazilian Grand Prix': 'BRA'
+    },
+    'race_abbrs_2021' : {
+        'Bahrain Grand Prix': 'BHR',
+        'Emilia Romagna Grand Prix': 'EMI',
+        'Portuguese Grand Prix': 'POR',
+        'Spanish Grand Prix': 'ESP',
+        'Monaco Grand Prix': 'MON',
+        'Azerbaijan Grand Prix': 'AZE',
+        'French Grand Prix': 'FRA',
+        'Styrian Grand Prix': 'STY',
+        'Austrian Grand Prix': 'AUT',
+        'British Grand Prix': 'GBR',
+        'Hungarian Grand Prix': 'HUN',
+        'Belgian Grand Prix': 'BEL',
+        'Dutch Grand Prix': 'NED',
+        'Italian Grand Prix': 'ITA',
+        'Russian Grand Prix': 'RUS',
+        'Turkish Grand Prix': 'TUR',
+        'United States Grand Prix': 'USA',
+        'Mexico City Grand Prix': 'MXC',
+        'São Paulo Grand Prix': 'SAP',
+        'Qatar Grand Prix': 'QAT',
+        'Saudi Arabian Grand Prix': 'SAU',
+        'Abu Dhabi Grand Prix': 'ABU'
     }
 }
 

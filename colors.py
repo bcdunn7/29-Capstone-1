@@ -16,5 +16,9 @@ line_colors = {
     2008: {
         'HAM': '#33FFE8',
         'MAS': '#F3A13D',
+    },
+    2021: {
+        'HAM': '#33FFE8',
+        'VER': '#3D4AF3'
     }
 }

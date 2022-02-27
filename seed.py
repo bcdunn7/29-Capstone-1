@@ -3,7 +3,7 @@ from models import db, Season, Driver, Race, Finish, Selected_Driver, Change
 from abbreviations import race_abbrs
 import requests
 
-API_BASE_URL = "https://ergast.com/api/f1"
+API_BASE_URL = "http://ergast.com/api/f1"
 
 #Drop and Create all Tables
 
@@ -34,7 +34,7 @@ def make_API_call_and_generate_data(year, drivers):
 
     #Season
     s = Season(
-        year = int(data['season']),
+        year = float(data['season']),
         rounds = len(races)
     )
     db.session.add(s)
@@ -89,7 +89,7 @@ def make_API_call_and_generate_data(year, drivers):
                 d = Driver.query.filter_by(code=result['Driver']['code']).first()
                 #find finish position and points (what a given driver scored in a given race)
                 position = int(result['position'])
-                points = int(result['points'])
+                points = float(result['points'])
 
                 #create finish instance
                 f = Finish(
@@ -124,6 +124,8 @@ make_API_call_and_generate_data(2007, ['RAI', 'HAM', "ALO", "MAS"])
 make_API_call_and_generate_data(2010, ['VET', 'ALO', 'WEB', 'HAM', 'BUT', 'MAS'])
 
 make_API_call_and_generate_data(2008, ['HAM', 'MAS'])
+
+make_API_call_and_generate_data(2021, ['HAM', 'VER'])
 
 # This function currently uses driver codes for disambiguation, but the API does not support codes for all (namely, older than 2005) seasons. A modified function would need to be created for those
 
@@ -307,6 +309,39 @@ brazil_2008 = Race.query.filter(Race.season_year == 2008, Race.abbreviation == '
 brazil_2008.blurb = "The 2008 Brazilian Grand Prix remains perhaps the most dramatic final race of a Formula 1 season.  For the majority of the race Massa led with Hamilton only a few position behind (but enough to win the championship. However, rain began to fall on lap 63 (of 71) and all of the top drivers except Timo Glock pitted for intermediate-weather tires. As a result, Glock moved passed Hamilton into fourth place, demoting Hamilton to 5th (the lowest place where we would still win the championship). On lap 69 (two to the end), Vettel passed Hamilton demoting him to 6th, giving Massa the championship. As Massa passed the finish line, premature celebration erupted in the Ferrari garage and Vettel and then Hamilton passed the struggling Timo Glock around the very final corner of the race, a mere few hundred meters from the finish line, promoting Hamilton to 5th place winning him the championship by 1 point. Although 6th place would have resulted in a tie on points, Massa would have one the championship since he had more race wins."
 brazil_2008.change_text = "Hamilton can't fight back to 5th place, finishes 6th (3pts)."
 db.session.add(brazil_2008)
+
+
+#2021
+s2021 = Season.query.get(2021)
+s2021.overview = "The 2021 season is already regarded by many fans to be one of the best seasons in Formula 1 history. Reigning champion Lewis Hamilton seeking to defend his title and achieve a record breaking 8 World Drivers' Chamionships. But young Red Bull driver Max Verstappen would pose a formitable threat. The season was dramatic and controversial, with the two title contenders coming together many times. The season left no room for relaxation either with the title being decided on the last lap of the last race of the season in one of the most controversial finishes in Formula 1 history."
+s2021.headline = "Verstappen 395.5 — Hamilton 387.5"
+db.session.add(s2021)
+
+azerbaijan_2021 = Race.query.filter(Race.season_year == 2021, Race.abbreviation == 'AZE').first()
+azerbaijan_2021.blurb = "Azerbaijan: A few races into the season, the competition between Max and Lewis was heating up. Here, in dramatic fasion, both drivers could have one the race. Max was leading for the majority of the race and looking likely to win it when a massive blowout sent into into the wall. Upon a later restart, Hamilton took the lead before mistakenly leaving on 'Brake Magic' which left him unable to turn."
+azerbaijan_2021.change_text = "Tires suffer no issues, Max wins race (25pts). HAM finishes 3rd."
+db.session.add(azerbaijan_2021)
+
+britain_2021 = Race.query.filter(Race.season_year == 2021, Race.abbreviation == 'GBR').first()
+britain_2021.blurb = "Britian was where these two rivals first clashed in a serious and dramatic way this season (though not the last!). After a phenomenal couple corners of racing, Lewis threw his car up the inside of a high speed corner and Max closed in tightly to prevent this move. As a result the two collided sending Max flying into the barriers. Lewis suffered time loss and a penalty but went on to win the race."
+britain_2021.change_text = "Lewis does not make move, Max wins race (25pts)."
+db.session.add(britain_2021)
+
+belguim_2021 = Race.query.filter(Race.season_year == 2021, Race.abbreviation == 'BEL').first()
+belguim_2021.blurb = "In a weird and rare situation for Formula 1, this race never really happened. The weekend at Spa was characterized by heavy rain and this continued onto race day. The race was delayed and delayed but eventually race director Michael Masi decided to try to send the cars out behind the safety car for only 3 laps before red flagging the race and never restarting it. It broke the record for the shortest Formula 1 race in history and it is the only Formula 1 race in history with no racing under green flag conditions. This decision was yet another controversial moment in one of the most controversial seasons in Formula 1 history. As such Max won the race with Lewis in 3rd as this was the qualifying positions."
+belguim_2021.change_text = "Race is not conducted and no points are awarded."
+db.session.add(belguim_2021)
+
+italy_2021 = Race.query.filter(Race.season_year == 2021, Race.abbreviation == 'ITA').first()
+italy_2021.blurb = "In the second major crash between the two drivers this season, Max aggresively tried to beat Hamilton as Lewis rejoined the track from the pit exit. Max's move and Hamilton's tight defending ended up with serious contact and Max's Red Bull being thrown on-top of Lewis' car striking Lewis in the head. Max was heavily criticized especially for leaving the scene saying 'That's what you get' with 3-time Formula champion Jackie Stewart saying Verstappen was 'taking longer than expected to mature.' Max was handed a 3-place grid penalty at the following race."
+italy_2021.change_text = "Max yields battle to Lewis. Lewis wins race with Max in 2nd."
+db.session.add(italy_2021)
+
+abu_dhabi_2021 = Race.query.filter(Race.season_year == 2021, Race.abbreviation == 'ABU').first()
+abu_dhabi_2021.blurb = "After a controversial start in itself, Lewis was easily leading and winning the final Grand Prix and the championship with less than 10 laps remaining. But in the most controversial moment of the modern F1 era following a safety car, only the few cars between Lewis (1st) and Max (2nd) were allowed to unlap with the saftey car coming in immediately after. Thus breaching the sporting regulations for saftey car procedures. This left Lewis definding from Max on 44-lap old hard tires against a brand new set of softs. Max passed Lewis with relative ease earning him the race win and the championship. Several protests were lodged with the FIA and many cried out against the unfair saftey car policies of Michael Masi. But the FIA decided to remain with the race as it stood. Since then, the FIA has acknoledged that this 'tarnished the image of the championship' and has removed Michael Masi from race directing."
+abu_dhabi_2021.change_text = "Saftey car procedures are followed leaving Hamilton to win the race."
+db.session.add(abu_dhabi_2021)
+
 # *************************************************************************************************
 # *************************************************************************************************
 
@@ -470,6 +505,31 @@ add_change(2008, japan_2008, MAS, 9, 0)
 
 # brazil
 add_change(2008, brazil_2008, HAM, 6, 3)
+
+# s2021 changes
+# find 2021 drivers
+HAM = Driver.query.filter_by(code='HAM').first()
+VER = Driver.query.filter_by(code='VER').first()
+# Azerbaijan
+add_change(2021, azerbaijan_2021, VER, 1, 25)
+add_change(2021, azerbaijan_2021, HAM, 3, 15)
+
+# Britain
+add_change(2021, britain_2021, VER, 1, 28)
+add_change(2021, britain_2021, HAM, 2, 18)
+
+# Spa
+add_change(2021, belguim_2021, VER, 99, 0)
+add_change(2021, belguim_2021, HAM, 99, 0)
+
+# Monza
+add_change(2021, italy_2021, VER, 2, 18)
+add_change(2021, italy_2021, HAM, 1, 25)
+
+# Abu Dhabi
+add_change(2021, abu_dhabi_2021, VER, 2, 19)
+add_change(2021, abu_dhabi_2021, HAM, 1, 25)
+
 
 
 # **********************
